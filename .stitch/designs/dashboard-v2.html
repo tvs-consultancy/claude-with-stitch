@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediaPlan Pro Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary": "#004ac6",
+                        "secondary": "#545f73",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#2563eb",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary-fixed": "#001c39",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "inverse-primary": "#b4c5ff",
+                        "on-surface": "#191c1e",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary": "#ffffff",
+                        "outline": "#737686",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#434655",
+                        "outline-variant": "#c3c6d7",
+                        "on-secondary-container": "#586377",
+                        "secondary-container": "#d5e0f8",
+                        "surface-container": "#eceef0",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "background": "#f7f9fb",
+                        "surface-container-highest": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#0053db",
+                        "surface-container-high": "#e6e8ea",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#00569c",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-primary-container": "#eeefff",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary-container": "#196fc0",
+                        "on-tertiary-container": "#ebf1ff",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed-dim": "#bcc7de"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .glass-header {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (Authority Source: JSON) -->
+<aside class="bg-slate-900 fixed left-0 top-0 h-screen w-64 flex flex-col h-full py-6 z-50">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-white tracking-wide">MediaPlan Pro</h1>
+<p class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">AI-Powered Planning</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-2">
+<!-- Active Tab: Dashboard -->
+<a class="bg-blue-600 text-white rounded-md mx-2 px-4 py-2 font-semibold flex items-center gap-3 transition-all scale-95 active:duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-inter body-md tracking-tight">Dashboard</span>
+</a>
+<a class="text-slate-400 hover:text-white px-4 py-2 transition-colors hover:bg-slate-800 rounded-md mx-2 flex items-center gap-3 transition-all scale-95 active:duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-inter body-md tracking-tight">Chat</span>
+</a>
+<a class="text-slate-400 hover:text-white px-4 py-2 transition-colors hover:bg-slate-800 rounded-md mx-2 flex items-center gap-3 transition-all scale-95 active:duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+<span class="font-inter body-md tracking-tight">Files</span>
+</a>
+<a class="text-slate-400 hover:text-white px-4 py-2 transition-colors hover:bg-slate-800 rounded-md mx-2 flex items-center gap-3 transition-all scale-95 active:duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-inter body-md tracking-tight">Media Plans</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-800 px-2 space-y-1">
+<a class="text-slate-400 hover:text-white px-4 py-2 transition-colors hover:bg-slate-800 rounded-md mx-2 flex items-center gap-3 transition-all scale-95 active:duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-inter body-md tracking-tight">Profile</span>
+</a>
+<a class="text-slate-400 hover:text-white px-4 py-2 transition-colors hover:bg-slate-800 rounded-md mx-2 flex items-center gap-3 transition-all scale-95 active:duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-inter body-md tracking-tight">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar (Authority Source: JSON) -->
+<header class="sticky top-0 w-full glass-header bg-slate-50/80 dark:bg-slate-950/80 z-40 flex justify-between items-center px-8 py-3 shadow-sm opacity-4">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-full py-1.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant/60" placeholder="Search plans, assets, or budgets..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors tap-highlight-none">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors tap-highlight-none">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-secondary-container flex items-center justify-center border border-outline-variant/10">
+<span class="text-on-secondary-container text-xs font-bold">JD</span>
+</div>
+</div>
+</header>
+<!-- Canvas Content Area -->
+<div class="p-8 space-y-8 max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<section class="flex flex-col gap-1">
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Dashboard</h2>
+<p class="text-on-surface-variant font-medium">Overview of your media planning activity</p>
+</section>
+<!-- Stats Row: Tonal Layering Principle -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-1 rounded-xl">
+<div class="bg-surface-container-lowest p-6 rounded-[10px] shadow-sm hover:shadow-md transition-shadow">
+<p class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant/70 mb-1">Active Campaigns</p>
+<div class="flex items-end justify-between">
+<span class="text-3xl font-bold text-on-surface">4</span>
+<span class="text-emerald-600 text-xs font-bold bg-emerald-100/50 px-2 py-0.5 rounded-full">+1 this month</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-1 rounded-xl">
+<div class="bg-surface-container-lowest p-6 rounded-[10px] shadow-sm hover:shadow-md transition-shadow">
+<p class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant/70 mb-1">Total Budget</p>
+<div class="flex items-end justify-between">
+<span class="text-3xl font-bold text-on-surface">$2,385,000</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low p-1 rounded-xl">
+<div class="bg-surface-container-lowest p-6 rounded-[10px] shadow-sm hover:shadow-md transition-shadow">
+<p class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant/70 mb-1">Active Spend</p>
+<div class="flex items-end justify-between">
+<span class="text-3xl font-bold text-on-surface">$1,075,000</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-low p-1 rounded-xl">
+<div class="bg-surface-container-lowest p-6 rounded-[10px] shadow-sm hover:shadow-md transition-shadow">
+<p class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant/70 mb-1">Draft Plans</p>
+<div class="flex items-end justify-between">
+<span class="text-3xl font-bold text-on-surface">4</span>
+<span class="text-amber-600 text-xs font-bold bg-amber-100/50 px-2 py-0.5 rounded-full">Awaiting review</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions: Tinted Bento Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<button class="group relative overflow-hidden bg-primary p-6 rounded-xl text-left transition-all hover:scale-[1.02] active:scale-[0.98]">
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-white">chat</span>
+</div>
+<h3 class="text-lg font-bold text-white mb-1">Start Planning Chat</h3>
+<p class="text-white/70 text-sm">Let AI help you optimize your Q4 allocation</p>
+</button>
+<button class="group relative overflow-hidden bg-tertiary-container p-6 rounded-xl text-left transition-all hover:scale-[1.02] active:scale-[0.98]">
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-white">upload_file</span>
+</div>
+<h3 class="text-lg font-bold text-white mb-1">Upload Files</h3>
+<p class="text-white/70 text-sm">Ingest raw media specs and cost sheets</p>
+</button>
+<button class="group relative overflow-hidden bg-secondary p-6 rounded-xl text-left transition-all hover:scale-[1.02] active:scale-[0.98]">
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-white">visibility</span>
+</div>
+<h3 class="text-lg font-bold text-white mb-1">View All Plans</h3>
+<p class="text-white/70 text-sm">Access your full historical archive</p>
+</button>
+</div>
+<!-- Recent Media Plans Table -->
+<section class="bg-surface-container-low p-1 rounded-xl">
+<div class="bg-surface-container-lowest rounded-[10px] overflow-hidden shadow-sm">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="text-xl font-bold text-on-surface">Recent Media Plans</h3>
+<button class="text-primary text-sm font-semibold hover:underline">Export CSV</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">Plan Name</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">Client</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">Budget</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">Channels</th>
+<th class="px-6 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+</div>
+<span class="font-semibold text-on-surface">Q4 Alpha Launch</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-sm">Starlight Corp</td>
+<td class="px-6 py-4 text-on-surface font-medium">$450,000</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-tighter">Active</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary">Meta</span>
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary">Google</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">sunny</span>
+</div>
+<span class="font-semibold text-on-surface">Summer Refresh 2024</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-sm">Global Retail Co</td>
+<td class="px-6 py-4 text-on-surface font-medium">$820,000</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-tighter">Planning</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary">TikTok</span>
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary">OOH</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">campaign</span>
+</div>
+<span class="font-semibold text-on-surface">Brand Awareness 2.0</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-sm">AeroDynamics</td>
+<td class="px-6 py-4 text-on-surface font-medium">$125,000</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold uppercase tracking-tighter">Draft</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary">LinkedIn</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">celebration</span>
+</div>
+<span class="font-semibold text-on-surface">Holiday Push 2024</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-sm">Visionary Labs</td>
+<td class="px-6 py-4 text-on-surface font-medium">$1,200,000</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-slate-200 text-slate-600 text-xs font-bold uppercase tracking-tighter">Paused</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary">Meta</span>
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary">CTV</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">bolt</span>
+</div>
+<span class="font-semibold text-on-surface">Flash Sale Flash</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-sm">Urban Edge</td>
+<td class="px-6 py-4 text-on-surface font-medium">$65,000</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-tighter">Active</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary">Snapchat</span>
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary">Google</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer / Signature Detail -->
+<footer class="mt-auto p-8 text-center">
+<p class="text-xs text-on-surface-variant/40 font-medium">MediaPlan Pro © 2024. Enterprise Edition v4.2.1</p>
+</footer>
+</main>
+<!-- FAB Suppression Rule: Not rendered on dashboard as secondary action is preferred via quick actions -->
+</body></html>
