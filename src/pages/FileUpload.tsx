@@ -1,7 +1,33 @@
 import { useState, useRef, useCallback } from 'react';
 import { type UploadedFile, formatFileSize } from '../data/mock-data';
+import Icon from '../components/Icon';
 
 let nextFileId = 1;
+
+const fileTypeConfig: Record<string, { icon: string; color: string }> = {
+  image: { icon: 'image', color: 'bg-emerald-50 text-emerald-600' },
+  pdf: { icon: 'description', color: 'bg-red-50 text-red-600' },
+  video: { icon: 'movie', color: 'bg-purple-50 text-purple-600' },
+  audio: { icon: 'music_note', color: 'bg-pink-50 text-pink-600' },
+  spreadsheet: { icon: 'table_chart', color: 'bg-green-50 text-green-600' },
+  presentation: { icon: 'slideshow', color: 'bg-orange-50 text-orange-600' },
+  document: { icon: 'article', color: 'bg-blue-50 text-blue-600' },
+  design: { icon: 'architecture', color: 'bg-blue-50 text-blue-600' },
+  default: { icon: 'attach_file', color: 'bg-slate-50 text-slate-600' },
+};
+
+function getFileConfig(type: string) {
+  if (type.startsWith('image/')) return fileTypeConfig.image;
+  if (type.includes('pdf')) return fileTypeConfig.pdf;
+  if (type.includes('video')) return fileTypeConfig.video;
+  if (type.includes('audio')) return fileTypeConfig.audio;
+  if (type.includes('spreadsheet') || type.includes('excel') || type.includes('csv'))
+    return fileTypeConfig.spreadsheet;
+  if (type.includes('presentation') || type.includes('powerpoint'))
+    return fileTypeConfig.presentation;
+  if (type.includes('document') || type.includes('word')) return fileTypeConfig.document;
+  return fileTypeConfig.default;
+}
 
 export default function FileUpload() {
   const [files, setFiles] = useState<UploadedFile[]>([]);
@@ -50,151 +76,170 @@ export default function FileUpload() {
     setFiles((prev) => prev.filter((f) => f.id !== id));
   }
 
-  const fileTypeIcon = (type: string): string => {
-    if (type.startsWith('image/')) return '🖼️';
-    if (type.includes('pdf')) return '📄';
-    if (type.includes('video')) return '🎬';
-    if (type.includes('audio')) return '🎵';
-    if (type.includes('spreadsheet') || type.includes('excel') || type.includes('csv')) return '📊';
-    if (type.includes('presentation') || type.includes('powerpoint')) return '📽️';
-    if (type.includes('document') || type.includes('word')) return '📝';
-    return '📎';
-  };
-
-  const completedCount = files.filter((f) => f.progress >= 100).length;
   const uploadingCount = files.filter((f) => f.progress < 100).length;
 
   return (
-    <div className="p-8 max-w-[1400px]">
+    <section className="max-w-6xl mx-auto p-8">
       {/* Page Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#0f172a]">Files</h1>
-        <p className="text-[#64748b] mt-1 text-sm">Upload and manage media assets & documents</p>
+      <div className="mb-10">
+        <h2 className="text-3xl font-extrabold tracking-tighter text-on-surface mb-2">
+          File Assets
+        </h2>
+        <p className="text-on-surface-variant font-medium">
+          Manage and curate your media planning workspace.
+        </p>
       </div>
 
       {/* Drop Zone */}
-      <div
-        onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-        onDragLeave={() => setIsDragging(false)}
-        onDrop={handleDrop}
-        onClick={() => fileInputRef.current?.click()}
-        className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all duration-200 mb-8 ${
-          isDragging
-            ? 'border-[#2563eb] bg-[#eff6ff] scale-[1.01]'
-            : 'border-[#e2e8f0] hover:border-[#2563eb]/40 hover:bg-[#f9fafb]'
-        }`}
-      >
-        <input
-          ref={fileInputRef}
-          type="file"
-          multiple
-          onChange={handleFileSelect}
-          className="hidden"
-        />
-        <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors ${isDragging ? 'bg-[#2563eb]/10' : 'bg-[#f1f5f9]'}`}>
-          <span className="text-4xl">{isDragging ? '📥' : '☁️'}</span>
-        </div>
-        <p className="text-lg font-semibold text-[#0f172a]">
-          {isDragging ? 'Drop files here' : 'Drag & drop files here'}
-        </p>
-        <p className="text-sm text-[#94a3b8] mt-1.5">or click to browse your files</p>
-        <div className="flex items-center justify-center gap-4 mt-5">
-          {['Images', 'PDFs', 'Videos', 'Documents', 'Spreadsheets'].map((type) => (
-            <span key={type} className="text-[11px] text-[#94a3b8] bg-[#f1f5f9] px-2.5 py-1 rounded-md font-medium">
-              {type}
-            </span>
-          ))}
+      <div className="relative mb-12">
+        <div
+          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+          onDragLeave={() => setIsDragging(false)}
+          onDrop={handleDrop}
+          onClick={() => fileInputRef.current?.click()}
+          className={`group relative flex flex-col items-center justify-center w-full h-80 border-2 border-dashed rounded-[2rem] transition-all cursor-pointer overflow-hidden ${
+            isDragging
+              ? 'border-primary-container bg-primary-container/10'
+              : 'border-primary-container/40 bg-primary-container/5 hover:bg-primary-container/[0.08] hover:border-primary-container'
+          }`}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-container/10 to-transparent pointer-events-none" />
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            onChange={handleFileSelect}
+            className="hidden"
+          />
+          <div className="z-10 flex flex-col items-center text-center">
+            <div className="w-20 h-20 mb-6 flex items-center justify-center rounded-full bg-white shadow-xl shadow-primary/5 text-primary">
+              <Icon name={isDragging ? 'download' : 'cloud_upload'} size="xl" />
+            </div>
+            <h3 className="text-xl font-bold text-on-surface mb-2 tracking-tight">
+              {isDragging ? 'Drop files here' : 'Drag and drop files here or click to browse'}
+            </h3>
+            <p className="text-on-surface-variant text-sm max-w-sm">
+              Support for images, PDFs, videos, documents, spreadsheets and more.
+            </p>
+          </div>
+          <div className="absolute bottom-6 right-6">
+            <button
+              className="px-6 py-2.5 bg-gradient-to-r from-primary to-primary-container text-white text-sm font-semibold rounded-xl shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
+              onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
+            >
+              Select Files
+            </button>
+          </div>
         </div>
       </div>
 
       {/* File List */}
       {files.length > 0 && (
-        <div className="bg-white rounded-xl border border-[#e2e8f0] shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-[#e2e8f0]">
+        <div className="bg-surface-container-lowest rounded-[2rem] shadow-sm overflow-hidden p-2">
+          <div className="px-6 py-5 flex items-center justify-between border-b border-surface-container-low mb-2">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-on-surface-variant">
+              Active Uploads & Recent Files
+            </h4>
             <div className="flex items-center gap-3">
-              <h2 className="font-semibold text-[#0f172a] text-sm">
-                Uploaded Files ({files.length})
-              </h2>
               {uploadingCount > 0 && (
-                <span className="inline-flex items-center gap-1.5 text-[11px] text-[#2563eb] bg-[#eff6ff] px-2 py-0.5 rounded-full font-medium">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb] animate-pulse" />
-                  {uploadingCount} uploading
+                <span className="text-xs font-semibold text-primary px-2.5 py-1 bg-primary/5 rounded-full">
+                  {uploadingCount} Task{uploadingCount !== 1 ? 's' : ''} Remaining
                 </span>
               )}
-              {completedCount > 0 && (
-                <span className="text-[11px] text-[#10b981] bg-[#dcfce7] px-2 py-0.5 rounded-full font-medium">
-                  {completedCount} completed
-                </span>
-              )}
+              <button
+                onClick={() => setFiles([])}
+                className="text-xs font-semibold text-danger hover:text-red-700 transition-colors"
+              >
+                Clear all
+              </button>
             </div>
-            <button
-              onClick={() => setFiles([])}
-              className="text-xs text-[#ef4444] hover:text-[#dc2626] font-medium transition-colors flex items-center gap-1"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
-              Clear all
-            </button>
           </div>
-          <div className="divide-y divide-[#f1f5f9]">
-            {files.map((file) => (
-              <div key={file.id} className="flex items-center gap-4 px-5 py-3.5 hover:bg-[#f8fafc] transition-colors">
-                <div className="w-10 h-10 rounded-lg bg-[#f1f5f9] flex items-center justify-center shrink-0">
-                  <span className="text-xl">{fileTypeIcon(file.type)}</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-[#0f172a] truncate">{file.name}</p>
-                  <div className="flex items-center gap-2 mt-0.5">
-                    <span className="text-[11px] text-[#94a3b8]">{formatFileSize(file.size)}</span>
-                    <span className="text-[11px] text-[#e2e8f0]">·</span>
-                    <span className="text-[11px] text-[#94a3b8]">{file.type || 'Unknown type'}</span>
+          <div className="space-y-1">
+            {files.map((file) => {
+              const config = getFileConfig(file.type);
+              const isComplete = file.progress >= 100;
+
+              return (
+                <div
+                  key={file.id}
+                  className="group flex items-center gap-6 px-6 py-4 rounded-xl hover:bg-surface-container-low transition-all"
+                >
+                  <div className={`w-12 h-12 flex items-center justify-center rounded-xl ${config.color}`}>
+                    <Icon name={config.icon} size="lg" />
                   </div>
-                  {file.progress < 100 && (
-                    <div className="mt-2 w-full bg-[#f1f5f9] rounded-full h-1.5">
+                  <div className="flex-1 min-w-0">
+                    <h5 className="text-sm font-bold text-on-surface truncate">{file.name}</h5>
+                    <div className="flex items-center gap-3 mt-1">
+                      <span className="text-xs font-medium text-on-surface-variant/70 uppercase">
+                        {formatFileSize(file.size)}
+                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <span className={`w-1.5 h-1.5 rounded-full ${isComplete ? 'bg-tertiary' : 'bg-primary animate-pulse'}`} />
+                        <span className={`text-[10px] font-bold uppercase tracking-tighter ${isComplete ? 'text-tertiary' : 'text-primary'}`}>
+                          {isComplete ? 'Success' : 'In Progress'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-48">
+                    <div className="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
                       <div
-                        className="bg-[#2563eb] h-1.5 rounded-full transition-all duration-300"
-                        style={{ width: `${file.progress}%` }}
+                        className={`h-full rounded-full transition-all duration-300 ${isComplete ? 'bg-tertiary' : 'bg-primary'}`}
+                        style={{ width: `${Math.min(file.progress, 100)}%` }}
                       />
                     </div>
-                  )}
-                </div>
-                <div className="flex items-center gap-3 shrink-0">
-                  {file.progress >= 100 ? (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#10b981]">
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                      Uploaded
-                    </span>
-                  ) : (
-                    <span className="text-[11px] text-[#64748b] font-medium tabular-nums">{Math.round(file.progress)}%</span>
-                  )}
+                  </div>
                   <button
-                    onClick={(e) => { e.stopPropagation(); handleRemove(file.id); }}
-                    className="w-7 h-7 rounded-lg flex items-center justify-center text-[#94a3b8] hover:text-[#ef4444] hover:bg-[#fef2f2] transition-all"
-                    title="Remove file"
+                    onClick={() => handleRemove(file.id)}
+                    className="p-2 text-on-surface-variant hover:bg-white rounded-lg transition-colors"
                   >
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    <Icon name={isComplete ? 'more_vert' : 'close'} size="sm" />
                   </button>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
 
+      {/* Empty State */}
       {files.length === 0 && (
         <div className="text-center py-16">
-          <div className="w-16 h-16 rounded-2xl bg-[#f1f5f9] flex items-center justify-center mx-auto mb-4">
-            <span className="text-3xl">📂</span>
+          <div className="w-20 h-20 rounded-full bg-surface-container-low flex items-center justify-center mx-auto mb-4">
+            <Icon name="folder_open" size="xl" className="text-on-surface-variant" />
           </div>
-          <p className="font-semibold text-[#0f172a]">No files uploaded yet</p>
-          <p className="text-sm text-[#94a3b8] mt-1">Drag files above or click to browse</p>
+          <p className="font-bold text-on-surface text-lg">No files uploaded yet</p>
+          <p className="text-sm text-on-surface-variant mt-1">
+            Drag files above or click to browse
+          </p>
         </div>
       )}
-    </div>
+
+      {/* Storage Stats */}
+      <div className="mt-12 grid grid-cols-3 gap-6">
+        <div className="p-6 rounded-[2rem] bg-surface-container-low">
+          <Icon name="storage" className="text-primary mb-4" />
+          <h6 className="font-bold text-on-surface mb-1">Storage Usage</h6>
+          <p className="text-xs text-on-surface-variant mb-4">4.2 GB of 20 GB used</p>
+          <div className="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+            <div className="h-full bg-primary w-[21%]" />
+          </div>
+        </div>
+        <div className="p-6 rounded-[2rem] bg-surface-container-low">
+          <Icon name="verified" className="text-tertiary mb-4" />
+          <h6 className="font-bold text-on-surface mb-1">Encrypted Transfer</h6>
+          <p className="text-xs text-on-surface-variant">
+            All uploads are protected with AES-256 bank-grade encryption at rest and in transit.
+          </p>
+        </div>
+        <div className="p-6 rounded-[2rem] bg-surface-container-low">
+          <Icon name="hub" className="text-secondary mb-4" />
+          <h6 className="font-bold text-on-surface mb-1">Auto-Sync</h6>
+          <p className="text-xs text-on-surface-variant">
+            Your files are automatically synced across your team workspace.
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }

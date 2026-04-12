@@ -5,6 +5,7 @@ import {
   mockConversations,
   assistantResponses,
 } from '../data/mock-data';
+import Icon from '../components/Icon';
 
 let nextMsgId = 100;
 
@@ -62,135 +63,150 @@ export default function Chat() {
   return (
     <div className="flex h-full">
       {/* Conversation Sidebar */}
-      <div className="w-[272px] bg-white border-r border-[#e2e8f0] flex flex-col shrink-0">
-        <div className="p-4 border-b border-[#e2e8f0]">
-          <button
-            onClick={handleNewConversation}
-            className="w-full py-2.5 px-4 bg-[#2563eb] text-white rounded-xl text-sm font-medium hover:bg-[#1d4ed8] transition-colors flex items-center justify-center gap-2"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-            </svg>
-            New Conversation
-          </button>
-        </div>
-        <div className="flex-1 overflow-y-auto">
+      <aside className="h-full w-72 bg-white flex flex-col py-8 px-4 shadow-xl shadow-slate-200/50 z-10 overflow-y-auto shrink-0">
+        <button
+          onClick={handleNewConversation}
+          className="mb-8 w-full py-3 px-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-all"
+        >
+          <Icon name="add" size="sm" />
+          <span className="text-sm">New Conversation</span>
+        </button>
+
+        <nav className="flex-1 space-y-1">
           {conversations.map((conv) => (
             <button
               key={conv.id}
               onClick={() => setActiveConvId(conv.id)}
-              className={`w-full text-left px-4 py-3.5 border-b border-[#f1f5f9] transition-colors ${
+              className={`group w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer text-left ${
                 conv.id === activeConvId
-                  ? 'bg-[#eff6ff] border-l-2 border-l-[#2563eb]'
-                  : 'hover:bg-[#f9fafb]'
+                  ? 'text-blue-700 border-r-4 border-blue-600 bg-slate-50'
+                  : 'text-slate-500 hover:bg-slate-100'
               }`}
             >
-              <div className="flex items-center gap-2.5">
-                <span className="text-sm">💬</span>
-                <div className="min-w-0 flex-1">
-                  <p className={`text-sm font-medium truncate ${conv.id === activeConvId ? 'text-[#2563eb]' : 'text-[#0f172a]'}`}>
-                    {conv.title}
-                  </p>
-                  <p className="text-[11px] text-[#94a3b8] mt-0.5">{conv.createdAt} · {conv.messages.length} messages</p>
-                </div>
+              <Icon name={conv.id === activeConvId ? 'bar_chart' : 'chat_bubble_outline'} size="sm" />
+              <div className="min-w-0 flex-1">
+                <span className={`text-sm block truncate ${conv.id === activeConvId ? 'font-bold' : 'font-medium'}`}>
+                  {conv.title}
+                </span>
+                <span className="text-[10px] text-slate-400 block mt-0.5">
+                  {conv.createdAt} · {conv.messages.length} messages
+                </span>
               </div>
             </button>
           ))}
-        </div>
-        <div className="p-4 border-t border-[#e2e8f0]">
-          <p className="text-[11px] text-[#94a3b8] text-center">{conversations.length} conversations</p>
-        </div>
-      </div>
+        </nav>
 
-      {/* Chat Area */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <div className="px-6 py-4 bg-white border-b border-[#e2e8f0]">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="font-semibold text-[#0f172a]">{activeConv?.title ?? 'Select a conversation'}</h2>
-              <p className="text-[11px] text-[#94a3b8] mt-0.5">{activeConv?.messages.length ?? 0} messages</p>
+        <div className="mt-auto pt-6 border-t border-slate-100">
+          <div className="flex items-center gap-3 px-2">
+            <div className="h-10 w-10 rounded-full bg-secondary-container flex items-center justify-center">
+              <span className="text-sm font-bold text-on-surface">JD</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#dcfce7] text-[#15803d] text-[11px] font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
-                Online
-              </span>
+            <div className="flex flex-col">
+              <span className="text-sm font-bold">User</span>
+              <span className="text-[10px] text-slate-400 font-medium">Media Planner</span>
             </div>
           </div>
         </div>
+      </aside>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-5 bg-[#f8fafc]">
+      {/* Main Chat Area */}
+      <main className="flex-1 flex flex-col relative h-full">
+        {/* Header */}
+        <header className="w-full sticky top-0 bg-slate-50 flex justify-between items-center px-8 py-4 z-10 border-b border-outline-variant/10">
+          <div className="flex items-center gap-4">
+            <h2 className="text-lg font-bold tracking-tight text-on-surface">
+              {activeConv?.title ?? 'Select a conversation'}
+            </h2>
+          </div>
+          <div className="flex items-center gap-4 text-sm font-medium text-slate-500">
+            <span className="text-on-surface-variant">{activeConv?.messages.length ?? 0} messages</span>
+          </div>
+        </header>
+
+        {/* Message Area */}
+        <div className="flex-1 overflow-y-auto px-8 py-12 space-y-12 bg-surface">
           {activeConv?.messages.length === 0 && (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
-                <div className="w-16 h-16 rounded-2xl bg-[#eff6ff] flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl">💬</span>
+                <div className="w-16 h-16 rounded-2xl bg-primary-container/10 flex items-center justify-center mx-auto mb-4">
+                  <Icon name="smart_toy" filled size="xl" className="text-primary-container" />
                 </div>
-                <p className="font-semibold text-[#0f172a] text-lg">Start the conversation</p>
-                <p className="text-sm text-[#94a3b8] mt-1.5 max-w-xs">Ask about media planning strategies, budget allocation, or campaign optimization</p>
+                <p className="font-bold text-on-surface text-lg">Start the conversation</p>
+                <p className="text-sm text-on-surface-variant mt-1.5 max-w-xs">
+                  Ask about media planning strategies, budget allocation, or campaign optimization
+                </p>
               </div>
             </div>
           )}
-          {activeConv?.messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              {msg.role === 'assistant' && (
-                <div className="w-7 h-7 rounded-full bg-[#eff6ff] flex items-center justify-center shrink-0 mr-2.5 mt-1">
-                  <span className="text-xs">🤖</span>
+
+          {activeConv?.messages.map((msg) =>
+            msg.role === 'assistant' ? (
+              <div key={msg.id} className="flex flex-col items-start max-w-3xl">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-white">
+                    <Icon name="smart_toy" filled size="sm" />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
+                    Media Curator
+                  </span>
                 </div>
-              )}
-              <div
-                className={`max-w-[65%] px-4 py-3 ${
-                  msg.role === 'user'
-                    ? 'bg-[#2563eb] text-white rounded-2xl rounded-br-md shadow-[0_2px_8px_rgba(37,99,235,0.25)]'
-                    : 'bg-white border border-[#e2e8f0] text-[#0f172a] rounded-2xl rounded-bl-md shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
-                }`}
-              >
-                <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
-                <p className={`text-[11px] mt-2 ${msg.role === 'user' ? 'text-white/50' : 'text-[#94a3b8]'}`}>
+                <div className="bg-surface-container-lowest p-6 rounded-xl rounded-tl-none border border-outline-variant/10 shadow-[0_32px_64px_-4px_rgba(25,28,30,0.04)]">
+                  <p className="text-on-surface leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                </div>
+                <span className="mt-2 text-[10px] font-medium text-slate-400 ml-1">
                   {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </p>
+                </span>
               </div>
-              {msg.role === 'user' && (
-                <div className="w-7 h-7 rounded-full bg-[#2563eb] flex items-center justify-center shrink-0 ml-2.5 mt-1">
-                  <span className="text-xs text-white font-bold">U</span>
+            ) : (
+              <div key={msg.id} className="flex flex-col items-end max-w-3xl ml-auto">
+                <div className="flex items-center gap-3 mb-3 flex-row-reverse">
+                  <div className="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
+                    <span className="text-xs font-bold text-on-surface">JD</span>
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-slate-400">You</span>
                 </div>
-              )}
-            </div>
-          ))}
+                <div className="bg-primary text-white p-6 rounded-xl rounded-tr-none shadow-lg shadow-primary/10">
+                  <p className="leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                </div>
+                <span className="mt-2 text-[10px] font-medium text-slate-400 mr-1">
+                  {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              </div>
+            )
+          )}
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
-        <div className="p-4 bg-white border-t border-[#e2e8f0]">
-          <div className="flex gap-3 items-end">
-            <div className="flex-1 relative">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
-                placeholder="Ask about media planning..."
-                className="w-full px-4 py-3 border border-[#e2e8f0] rounded-xl text-sm text-[#0f172a] placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb] transition-colors"
-              />
-            </div>
+        {/* Input Bar */}
+        <div className="w-full p-6 glass-header bg-white/80 border-t border-outline-variant/10">
+          <div className="max-w-4xl mx-auto flex items-center gap-4 bg-surface-container-low rounded-2xl p-2 pr-4 ring-1 ring-inset ring-outline-variant/20 focus-within:ring-primary/50 transition-all">
+            <button className="p-2 text-slate-400 hover:text-primary transition-colors">
+              <Icon name="attach_file" />
+            </button>
+            <input
+              className="flex-1 bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder:text-slate-400"
+              placeholder="Ask about media planning..."
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
+            />
+            <button className="p-2 text-slate-400 hover:text-primary transition-colors">
+              <Icon name="mic" />
+            </button>
             <button
               onClick={handleSend}
               disabled={!input.trim()}
-              className="px-5 py-3 bg-[#2563eb] text-white rounded-xl text-sm font-medium hover:bg-[#1d4ed8] transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 shadow-[0_2px_8px_rgba(37,99,235,0.25)] disabled:shadow-none"
+              className="bg-primary text-white w-10 h-10 rounded-xl flex items-center justify-center active:scale-90 transition-all shadow-lg shadow-primary/20 disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
             >
-              Send
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-              </svg>
+              <Icon name="send" size="sm" />
             </button>
           </div>
+          <p className="text-[10px] text-center text-slate-400 mt-3 font-medium tracking-wide">
+            AI can make mistakes. Check important info.
+          </p>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Media Plans - MediaPlan Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface": "#f8f9ff",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed": "#00174b",
+                        "inverse-primary": "#b4c5ff",
+                        "surface-tint": "#0053db",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-container-low": "#eef4ff",
+                        "secondary-container": "#acbfff",
+                        "surface-container-highest": "#d4e4fa",
+                        "surface-bright": "#f8f9ff",
+                        "outline": "#737686",
+                        "surface-container": "#e5efff",
+                        "primary": "#004ac6",
+                        "tertiary-fixed": "#ffdbcd",
+                        "error": "#ba1a1a",
+                        "tertiary": "#943700",
+                        "surface-dim": "#ccdbf2",
+                        "primary-container": "#2563eb",
+                        "on-primary-container": "#eeefff",
+                        "on-secondary-container": "#394c84",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f8f9ff",
+                        "secondary-fixed": "#dbe1ff",
+                        "inverse-on-surface": "#e9f1ff",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#0d1c2d",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary": "#495c95",
+                        "primary-fixed": "#dbe1ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#31447b",
+                        "on-surface-variant": "#434655",
+                        "on-tertiary-container": "#ffede6",
+                        "on-tertiary-fixed": "#360f00",
+                        "surface-container-high": "#dbe9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#bc4800",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-background": "#0d1c2d",
+                        "inverse-surface": "#233143",
+                        "on-primary-fixed": "#00174b",
+                        "outline-variant": "#c3c6d7",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#d4e4fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-slate-100 dark:bg-slate-900 flex flex-col py-6 px-4 gap-4 z-50">
+<div class="flex items-center gap-3 px-2 mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg overflow-hidden">
+<img alt="Agency Logo" data-alt="minimalist professional agency logo with geometric shapes in royal blue and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWES8rAryhdF_FifV094bbMj_W8mm4MHrkoJvCuV9zwH83Oxe_31ebHx79er2P_eMN6dg8i7b_oTCbj61memYy0kjUR3j9BrQVyjdEJFy0T7t3yE5VJfaNbSL0mlOqfwQZ1R-cWpgBiuvSP7ND2ZNmydH14TAHGSIn-S9rEtL050A-4ATX2Oc4j0lsgSeGBjvWfg8LGkswF692NhhU1VSudAKhJHkofORBwqNhQmU9QPanjQwFm4ihEIP_-sEkQethp2R-iv3NTdgF"/>
+</div>
+<div>
+<h1 class="text-lg font-black text-slate-900 dark:text-slate-50 tracking-tight">MediaPlan Pro</h1>
+<p class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Global Planning</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<!-- Active State: Media Plans -->
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 shadow-sm rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span class="text-sm font-semibold">Media Plans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-semibold">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-semibold">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-1">
+<button class="mb-4 w-full py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-bold text-sm shadow-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Campaign
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-semibold">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="text-sm font-semibold">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-8 py-4 bg-slate-50 dark:bg-slate-950 sticky top-0 z-40">
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-high rounded-xl border-none focus:ring-2 focus:ring-primary w-80 text-sm" placeholder="Search plans, clients, or tags..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-4 py-1.5 text-blue-700 font-bold text-sm hover:bg-primary-fixed transition-colors rounded-lg">Upgrade</button>
+<button class="p-2 text-slate-600 hover:bg-slate-200/50 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-200/50 rounded-full transition-all">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm">
+<img alt="User profile" data-alt="professional corporate headshot of a smiling executive man in a tailored suit against a clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAud0SgSVsnQI5_72W6VsdS9CY9Z62xVTweD912dmnQ8xqSVcZmKrFFaeEU_1wGvWZJNLAvsemCqVG5loFFmFK5H80Eoq-VMqfXlOJVqWBij3U-xND0-m7dCX2jstRUV2qUIigaU7EYz1PqJBWOIy9UH1DGNWaAfbWMSvN7jVR2kSpZgmHuHftBSq9AS3PlbLtKQ2U4xGsxotA4JOUsNLorJyrJeJKj5p_vphmmTROaoCYDb4Q_PQIBIzqrRLGSdnfegmyfJTT7AJGo"/>
+</div>
+</div>
+</header>
+<!-- Workspace -->
+<main class="p-8 flex-1">
+<!-- Page Header Section -->
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface mb-1">Media Plans</h2>
+<p class="text-on-surface-variant font-medium flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                        12 Active Plans in Workspace
+                    </p>
+</div>
+<!-- View Toggle & Filters -->
+<div class="flex items-center gap-4">
+<!-- Segmented Control -->
+<div class="bg-surface-container-high p-1 rounded-xl flex">
+<button class="px-4 py-2 text-slate-500 hover:text-slate-700 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">list</span>
+</button>
+<button class="px-4 py-2 bg-white shadow-sm rounded-lg text-primary font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">grid_view</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-lowest border border-outline-variant/20 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                        Status: All
+                        <span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Bento-ish Grid of Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white rounded-xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow flex flex-col p-5 group">
+<div class="flex justify-between items-start mb-4">
+<div class="px-2.5 py-1 bg-[#dcfce7] text-[#15803d] rounded-full text-[10px] font-bold tracking-wider uppercase">Active</div>
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-100 rounded-lg transition-all text-slate-400">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-lg font-bold text-on-surface leading-tight mb-1">Q4 Global Tech Launch</h3>
+<p class="text-sm font-medium text-on-surface-variant mb-6">Client: Nexus Innovations</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Budget</span>
+<span class="text-sm font-bold text-on-surface">$1,250,000</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Duration</span>
+<span class="text-sm font-bold text-on-surface">90 Days</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-50 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Social</span>
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Search</span>
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Display</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow flex flex-col p-5 group">
+<div class="flex justify-between items-start mb-4">
+<div class="px-2.5 py-1 bg-surface-container-highest text-slate-600 rounded-full text-[10px] font-bold tracking-wider uppercase">Draft</div>
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-100 rounded-lg transition-all text-slate-400">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-lg font-bold text-on-surface leading-tight mb-1">Sustainable Spring '24</h3>
+<p class="text-sm font-medium text-on-surface-variant mb-6">Client: Terra Apparel</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Budget</span>
+<span class="text-sm font-bold text-on-surface">$420,000</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Duration</span>
+<span class="text-sm font-bold text-on-surface">45 Days</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-50 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">OOH</span>
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Social</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow flex flex-col p-5 group">
+<div class="flex justify-between items-start mb-4">
+<div class="px-2.5 py-1 bg-[#dcfce7] text-[#15803d] rounded-full text-[10px] font-bold tracking-wider uppercase">Active</div>
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-100 rounded-lg transition-all text-slate-400">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-lg font-bold text-on-surface leading-tight mb-1">Financial Literacy Campaign</h3>
+<p class="text-sm font-medium text-on-surface-variant mb-6">Client: Zenith Bank</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Budget</span>
+<span class="text-sm font-bold text-on-surface">$890,000</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Duration</span>
+<span class="text-sm font-bold text-on-surface">120 Days</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-50 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Radio</span>
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Podcast</span>
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Web</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white rounded-xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow flex flex-col p-5 group">
+<div class="flex justify-between items-start mb-4">
+<div class="px-2.5 py-1 bg-error-container text-error rounded-full text-[10px] font-bold tracking-wider uppercase">Paused</div>
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-100 rounded-lg transition-all text-slate-400">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-lg font-bold text-on-surface leading-tight mb-1">Summer Festival Circuit</h3>
+<p class="text-sm font-medium text-on-surface-variant mb-6">Client: Beats &amp; Rhythm</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Budget</span>
+<span class="text-sm font-bold text-on-surface">$2.1M</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Duration</span>
+<span class="text-sm font-bold text-on-surface">60 Days</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-50 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Experiential</span>
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Social</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-white rounded-xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow flex flex-col p-5 group">
+<div class="flex justify-between items-start mb-4">
+<div class="px-2.5 py-1 bg-[#dcfce7] text-[#15803d] rounded-full text-[10px] font-bold tracking-wider uppercase">Active</div>
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-100 rounded-lg transition-all text-slate-400">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-lg font-bold text-on-surface leading-tight mb-1">Luxury Real Estate Showcase</h3>
+<p class="text-sm font-medium text-on-surface-variant mb-6">Client: Elite Properties</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Budget</span>
+<span class="text-sm font-bold text-on-surface">$550,000</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Duration</span>
+<span class="text-sm font-bold text-on-surface">180 Days</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-50 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Print</span>
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[11px] font-bold rounded-lg uppercase tracking-tight">Digital Display</span>
+</div>
+</div>
+<!-- Card 6 - Add Placeholder Card -->
+<div class="bg-surface-container-low border-2 border-dashed border-outline-variant/50 rounded-xl flex flex-col items-center justify-center p-8 group cursor-pointer hover:border-primary transition-colors">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-slate-400 group-hover:text-primary transition-colors shadow-sm mb-3">
+<span class="material-symbols-outlined text-3xl">add_circle</span>
+</div>
+<span class="text-sm font-bold text-slate-500 group-hover:text-primary">Create New Plan</span>
+</div>
+</div>
+<!-- Floating Sidebar / Detail Overlay (Asymmetric UI element) -->
+<div class="fixed right-8 bottom-8 w-80 bg-white/80 backdrop-blur-xl border border-outline-variant/10 shadow-[0_20px_40px_rgba(13,28,45,0.1)] rounded-2xl p-6 hidden lg:block">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">insights</span>
+</div>
+<h4 class="font-bold text-on-surface tracking-tight">Workspace Insights</h4>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low/50 p-4 rounded-xl">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Total Managed Budget</span>
+</div>
+<div class="text-xl font-black text-on-surface">$4.52M</div>
+<div class="mt-2 h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[72%]"></div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#15803d]"></div>
+<span class="text-xs font-semibold text-on-surface-variant">Active Proposals</span>
+</div>
+<span class="text-xs font-bold">8</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-xs font-semibold text-on-surface-variant">Avg. CPM Index</span>
+</div>
+<span class="text-xs font-bold">$12.40</span>
+</div>
+</div>
+<button class="w-full mt-2 py-3 text-xs font-bold text-primary bg-primary-fixed hover:bg-primary-fixed-dim transition-colors rounded-xl uppercase tracking-widest">
+                        View Full Report
+                    </button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

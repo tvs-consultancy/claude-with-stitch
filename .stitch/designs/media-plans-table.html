@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediaPlan Pro - Media Plans</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#b4c5ff",
+                    "surface": "#f8f9ff",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "on-secondary-fixed": "#00174b",
+                    "inverse-primary": "#b4c5ff",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "surface-container-low": "#eef4ff",
+                    "secondary-container": "#acbfff",
+                    "surface-container-highest": "#d4e4fa",
+                    "surface-bright": "#f8f9ff",
+                    "outline": "#737686",
+                    "surface-container": "#e5efff",
+                    "primary": "#004ac6",
+                    "tertiary-fixed": "#ffdbcd",
+                    "error": "#ba1a1a",
+                    "tertiary": "#943700",
+                    "surface-dim": "#ccdbf2",
+                    "primary-container": "#2563eb",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-container": "#394c84",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#f8f9ff",
+                    "secondary-fixed": "#dbe1ff",
+                    "inverse-on-surface": "#e9f1ff",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#0d1c2d",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary": "#495c95",
+                    "primary-fixed": "#dbe1ff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#31447b",
+                    "on-surface-variant": "#434655",
+                    "on-tertiary-container": "#ffede6",
+                    "on-tertiary-fixed": "#360f00",
+                    "surface-container-high": "#dbe9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#bc4800",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "on-background": "#0d1c2d",
+                    "inverse-surface": "#233143",
+                    "on-primary-fixed": "#00174b",
+                    "outline-variant": "#c3c6d7",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#d4e4fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-glass {
+            background: rgba(248, 249, 255, 0.6);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- SideNavBar Anchor -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-slate-100 dark:bg-slate-900 flex flex-col h-full py-6 px-4 gap-4 z-50">
+<div class="flex items-center gap-3 px-2 mb-4">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+</div>
+<div>
+<h1 class="text-lg font-black text-slate-900 dark:text-slate-50 leading-none">MediaPlan Pro</h1>
+<p class="text-[10px] font-bold tracking-widest text-slate-500 uppercase mt-1">Global Planning</p>
+</div>
+</div>
+<button class="flex items-center justify-center gap-2 w-full py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-bold text-sm shadow-md transition-transform active:scale-95 mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+            New Campaign
+        </button>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-semibold text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white text-blue-700 shadow-sm rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="font-semibold text-sm">Media Plans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-semibold text-sm">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-semibold text-sm">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 border-t border-slate-200/50 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-semibold text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-semibold text-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar Anchor -->
+<header class="fixed top-0 right-0 left-0 bg-slate-50 z-40 flex justify-between items-center w-full px-6 py-3 ml-64 transition-all border-b border-transparent">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative max-w-md w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" data-icon="search">search</span>
+<input class="w-full bg-slate-200/50 border-none rounded-xl py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search plans or clients..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 text-xs font-bold text-blue-700 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                Upgrade
+            </button>
+<button class="p-2 text-slate-600 hover:bg-slate-200/50 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-200/50 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-slate-200" data-alt="professional portrait of a creative media director in a clean white studio setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ7_qQmnzmvDRCE78X84F63EjJ7Eq49T1SJP3mB6k3r33rv8_lKuv5JWdU6Q-BZE3zG-UYbvY7Puubtfsg2LhQDyNHGyKg9dp2FtQk7az7JSgbucsZsAonfG3bAXtO-ocYtKu5iKI3uSZwDn6DDkOjN7-WsGI60KpbGUZIbiKCL9AwrYHuI2Vww7VIHE3J5znYs5c7iqNFtRstAYvNGsmwa8nxJyFK8JJVdYEEI4Avd5CJnHdK5Md4lr_K8h0GNLXS9tvK_-IyXuVg"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pl-64 min-h-screen">
+<div class="p-8 max-w-[1400px] mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<h2 class="text-4xl font-extrabold tracking-tight text-on-surface mb-2">Media Plans</h2>
+<p class="text-on-surface-variant font-medium">Manage and track your media buying strategies</p>
+</div>
+<div class="bg-surface-container-low p-1 rounded-full flex gap-1 shadow-inner">
+<button class="px-6 py-2 rounded-full bg-surface-container-lowest text-primary font-bold text-sm shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="table_rows">table_rows</span>
+                        Table
+                    </button>
+<button class="px-6 py-2 rounded-full text-slate-500 font-bold text-sm hover:bg-slate-200/50 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="grid_view">grid_view</span>
+                        Grid
+                    </button>
+</div>
+</div>
+<!-- Filter Bar Section -->
+<div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+<div class="flex flex-wrap items-center gap-3">
+<div class="relative min-w-[300px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" data-icon="filter_list">filter_list</span>
+<select class="appearance-none w-full bg-white border border-outline-variant/30 rounded-xl py-2.5 pl-10 pr-10 text-sm font-semibold text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+<option>Status: All Plans</option>
+<option>Status: Active</option>
+<option>Status: Draft</option>
+<option>Status: Completed</option>
+<option>Status: Paused</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<div class="h-10 w-[1px] bg-outline-variant/20 hidden md:block"></div>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-white border border-outline-variant/30 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_today">calendar_today</span>
+                        This Quarter
+                    </button>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold tracking-widest text-slate-400 uppercase">4 Plans Total</span>
+<button class="p-2.5 bg-white border border-outline-variant/30 rounded-xl text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+<!-- Data Table Section -->
+<div class="bg-white rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-variant/30">
+<th class="px-6 py-4 text-[12px] font-bold tracking-widest text-slate-500 uppercase">Plan Name</th>
+<th class="px-6 py-4 text-[12px] font-bold tracking-widest text-slate-500 uppercase">Client</th>
+<th class="px-6 py-4 text-[12px] font-bold tracking-widest text-slate-500 uppercase">Date Range</th>
+<th class="px-6 py-4 text-[12px] font-bold tracking-widest text-slate-500 uppercase">Budget</th>
+<th class="px-6 py-4 text-[12px] font-bold tracking-widest text-slate-500 uppercase text-center">Status</th>
+<th class="px-6 py-4 text-[12px] font-bold tracking-widest text-slate-500 uppercase">Channels</th>
+<th class="px-6 py-4 text-[12px] font-bold tracking-widest text-slate-500 uppercase text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Q4 Alpha Launch -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<a class="text-primary font-bold hover:underline" href="#">Q4 Alpha Launch</a>
+</td>
+<td class="px-6 py-5 font-semibold text-slate-700">Aether Tech</td>
+<td class="px-6 py-5 text-sm text-slate-500">Oct 01 - Dec 31, 2024</td>
+<td class="px-6 py-5 font-mono text-sm font-bold">$450,000.00</td>
+<td class="px-6 py-5">
+<div class="flex justify-center">
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-black uppercase tracking-wider">Active</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">Meta</span>
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">Google</span>
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">TikTok</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-1 text-slate-300 group-hover:text-slate-500 transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Summer Refresh 2024 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<a class="text-primary font-bold hover:underline" href="#">Summer Refresh 2024</a>
+</td>
+<td class="px-6 py-5 font-semibold text-slate-700">Lumina Bev</td>
+<td class="px-6 py-5 text-sm text-slate-500">Jun 15 - Aug 31, 2024</td>
+<td class="px-6 py-5 font-mono text-sm font-bold">$125,000.00</td>
+<td class="px-6 py-5">
+<div class="flex justify-center">
+<span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-black uppercase tracking-wider">Draft</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">Meta</span>
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">OOH</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-1 text-slate-300 group-hover:text-slate-500 transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Global Expansion -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<a class="text-primary font-bold hover:underline" href="#">Global Expansion</a>
+</td>
+<td class="px-6 py-5 font-semibold text-slate-700">Vortex Global</td>
+<td class="px-6 py-5 text-sm text-slate-500">Jan 01 - Jun 30, 2024</td>
+<td class="px-6 py-5 font-mono text-sm font-bold">$2,800,000.00</td>
+<td class="px-6 py-5">
+<div class="flex justify-center">
+<span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-[10px] font-black uppercase tracking-wider">Completed</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">Google</span>
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">CTV</span>
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">OOH</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-1 text-slate-300 group-hover:text-slate-500 transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Holiday Push -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<a class="text-primary font-bold hover:underline" href="#">Holiday Push</a>
+</td>
+<td class="px-6 py-5 font-semibold text-slate-700">Swift Retail</td>
+<td class="px-6 py-5 text-sm text-slate-500">Nov 15 - Dec 24, 2024</td>
+<td class="px-6 py-5 font-mono text-sm font-bold">$890,000.00</td>
+<td class="px-6 py-5">
+<div class="flex justify-center">
+<span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-[10px] font-black uppercase tracking-wider">Paused</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">Meta</span>
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">Google</span>
+<span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">CTV</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-1 text-slate-300 group-hover:text-slate-500 transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-slate-50/50 flex items-center justify-between">
+<p class="text-xs font-bold text-slate-400">Showing 4 of 4 plans</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/30 text-slate-400 cursor-not-allowed">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/30 text-slate-400 cursor-not-allowed">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Asymmetric Floating Insight Section -->
+<div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 to-primary-container p-8 text-white">
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<h3 class="text-2xl font-bold mb-2">Q4 Performance Outlook</h3>
+<p class="text-blue-100 max-w-md">Aggregated data suggests a 14% increase in CPM across Social channels. Adjust your active plans to maintain ROI targets.</p>
+</div>
+<div class="flex gap-4 mt-8">
+<button class="px-6 py-2.5 bg-white text-primary font-bold rounded-xl text-sm shadow-lg hover:shadow-xl transition-all">View Analytics</button>
+<button class="px-6 py-2.5 bg-white/20 text-white font-bold rounded-xl text-sm backdrop-blur-md hover:bg-white/30 transition-all">Dismiss</button>
+</div>
+</div>
+<!-- Decorative background element -->
+<div class="absolute -right-16 -bottom-16 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+<div class="bg-white border border-outline-variant/30 rounded-2xl p-6 flex flex-col gap-4 shadow-sm">
+<h4 class="text-sm font-black uppercase tracking-widest text-slate-400">Spending by Channel</h4>
+<div class="space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold">
+<span class="text-slate-600">Google Search</span>
+<span class="text-primary">$1.4M</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold">
+<span class="text-slate-600">Meta Social</span>
+<span class="text-primary">$820k</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[40%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold">
+<span class="text-slate-600">Other (CTV/OOH)</span>
+<span class="text-primary">$1.1M</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[52%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
