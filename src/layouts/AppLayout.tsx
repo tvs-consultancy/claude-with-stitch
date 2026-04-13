@@ -1,4 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import Icon from '../components/Icon';
 
 const navItems = [
@@ -45,29 +49,43 @@ export default function AppLayout() {
           ))}
         </nav>
 
-        <div className="mt-auto pt-6 space-y-1 border-t border-zinc-800/50">
-          <NavLink
-            to="/plans"
-            className="w-full flex items-center justify-center gap-2 bg-primary-container text-white py-2.5 rounded-lg text-sm font-medium mb-6 hover:brightness-110 transition-all"
-          >
-            <Icon name="add" size="sm" />
-            New Plan
+        <div className="mt-auto pt-6 space-y-1">
+          <Separator className="bg-zinc-800/50 mb-4" />
+
+          <NavLink to="/plans">
+            <Button className="w-full bg-primary-container text-white hover:brightness-110 mb-6">
+              <Icon name="add" size="sm" />
+              New Plan
+            </Button>
           </NavLink>
 
-          <a className="flex items-center px-4 py-2 text-zinc-500 hover:text-white transition-colors" href="#">
-            <Icon name="settings" size="sm" className="mr-3" />
-            <span className="text-sm">Settings</span>
-          </a>
-          <a className="flex items-center px-4 py-2 text-zinc-500 hover:text-white transition-colors" href="#">
-            <Icon name="help" size="sm" className="mr-3" />
-            <span className="text-sm">Support</span>
-          </a>
+          <Tooltip>
+            <TooltipTrigger
+              render={<a className="flex items-center px-4 py-2 text-zinc-500 hover:text-white transition-colors" href="#" />}
+            >
+              <Icon name="settings" size="sm" className="mr-3" />
+              <span className="text-sm">Settings</span>
+            </TooltipTrigger>
+            <TooltipContent side="right">Application settings</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger
+              render={<a className="flex items-center px-4 py-2 text-zinc-500 hover:text-white transition-colors" href="#" />}
+            >
+              <Icon name="help" size="sm" className="mr-3" />
+              <span className="text-sm">Support</span>
+            </TooltipTrigger>
+            <TooltipContent side="right">Help & support</TooltipContent>
+          </Tooltip>
 
           {/* Profile Footer */}
           <div className="mt-6 flex items-center px-4 gap-3">
-            <div className="h-9 w-9 rounded-full bg-primary-container flex items-center justify-center shrink-0">
-              <span className="text-xs font-bold text-white">SC</span>
-            </div>
+            <Avatar size="lg" className="bg-primary-container">
+              <AvatarFallback className="bg-primary-container text-xs font-bold text-white">
+                SC
+              </AvatarFallback>
+            </Avatar>
             <div className="flex flex-col">
               <span className="text-sm font-medium text-white">Sarah Chen</span>
               <span className="text-[10px] text-zinc-500 uppercase tracking-wider">Lead Planner</span>

@@ -25,3 +25,15 @@ dist-ssr
 
 # MCP config (contains API keys)
 .mcp.json
+
+# Playwright MCP snapshots
+.playwright-mcp/
+
+# QA screenshots
+screenshots/
+
+# Remotion render output
+out/
+
+# Claude local settings
+.claude/

@@ -1,15 +1,27 @@
 import { useState, useMemo } from 'react';
 import { mockMediaPlans, formatCurrency, formatDateRange } from '../data/mock-data';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import Icon from '../components/Icon';
 
 type ViewMode = 'table' | 'cards';
 type StatusFilter = 'all' | 'active' | 'draft' | 'completed' | 'paused';
 
-const statusColors: Readonly<Record<string, string>> = {
-  active: 'bg-active-surface text-active-text',
-  draft: 'bg-draft-surface text-draft-text',
-  completed: 'bg-completed-surface text-completed-text',
-  paused: 'bg-paused-surface text-paused-text',
+const statusColors: Readonly<Record<string, { bg: string; text: string }>> = {
+  active: { bg: 'bg-active-surface', text: 'text-active-text' },
+  draft: { bg: 'bg-draft-surface', text: 'text-draft-text' },
+  completed: { bg: 'bg-completed-surface', text: 'text-completed-text' },
+  paused: { bg: 'bg-paused-surface', text: 'text-paused-text' },
 };
 
 export default function MediaPlans() {
@@ -38,15 +50,15 @@ export default function MediaPlans() {
         <div className="flex items-center gap-6">
           <div className="relative">
             <Icon name="search" className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-zinc" size="sm" />
-            <input
-              className="h-9 w-64 bg-slate-100 border-none rounded-lg pl-9 pr-4 text-xs focus:ring-2 focus:ring-corsair/20 transition-all outline-none"
+            <Input
+              className="h-9 w-64 bg-slate-100 border-none rounded-lg pl-9 pr-4 text-xs focus-visible:ring-2 focus-visible:ring-corsair/20"
               placeholder="Quick search..."
               type="text"
             />
           </div>
-          <button className="corsair-gradient text-white px-4 py-2 rounded-lg text-sm font-medium transition-transform active:scale-95">
+          <Button className="corsair-gradient text-white hover:brightness-110">
             Create Plan
-          </button>
+          </Button>
         </div>
       </header>
 
@@ -64,28 +76,24 @@ export default function MediaPlans() {
           </div>
           {/* View Toggle */}
           <div className="bg-paused-surface p-1 rounded-xl flex items-center">
-            <button
+            <Button
+              variant={view === 'table' ? 'secondary' : 'ghost'}
+              size="sm"
               onClick={() => setView('table')}
-              className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                view === 'table'
-                  ? 'bg-white shadow-sm text-deep-ink'
-                  : 'text-mid-zinc hover:text-deep-ink'
-              }`}
+              className={view === 'table' ? 'bg-white shadow-sm text-deep-ink' : 'text-mid-zinc hover:text-deep-ink'}
             >
               <Icon name="view_list" size="sm" />
               Table
-            </button>
-            <button
+            </Button>
+            <Button
+              variant={view === 'cards' ? 'secondary' : 'ghost'}
+              size="sm"
               onClick={() => setView('cards')}
-              className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                view === 'cards'
-                  ? 'bg-white shadow-sm text-deep-ink'
-                  : 'text-mid-zinc hover:text-deep-ink'
-              }`}
+              className={view === 'cards' ? 'bg-white shadow-sm text-deep-ink' : 'text-mid-zinc hover:text-deep-ink'}
             >
               <Icon name="grid_view" size="sm" />
               Cards
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -94,8 +102,8 @@ export default function MediaPlans() {
           <div className="flex items-center gap-3">
             <div className="relative">
               <Icon name="search" className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-zinc" size="sm" />
-              <input
-                className="h-10 w-72 bg-paused-surface border-none rounded-lg pl-10 pr-4 text-sm outline-none focus:ring-2 focus:ring-corsair/10"
+              <Input
+                className="h-10 w-72 bg-paused-surface border-none rounded-lg pl-10 pr-4 text-sm focus-visible:ring-2 focus-visible:ring-corsair/10"
                 placeholder="Filter plans by name or client..."
                 type="text"
                 value={search}
@@ -128,95 +136,99 @@ export default function MediaPlans() {
 
         {/* Table View */}
         {view === 'table' && (
-          <div className="bg-white rounded-2xl ambient-shadow overflow-hidden">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-paused-surface">
-                  <th className="px-6 py-4 text-left">
+          <Card className="bg-white ring-0 border-0 ambient-shadow rounded-2xl gap-0">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-paused-surface hover:bg-paused-surface border-b-0">
+                  <TableHead className="px-6 py-4">
                     <button className="flex items-center gap-2 text-[13px] font-bold text-mid-zinc uppercase tracking-[0.05em]">
                       PLAN NAME
                       <Icon name="unfold_more" size="sm" />
                     </button>
-                  </th>
-                  <th className="px-6 py-4 text-left">
+                  </TableHead>
+                  <TableHead className="px-6 py-4">
                     <button className="flex items-center gap-2 text-[13px] font-bold text-mid-zinc uppercase tracking-[0.05em]">
                       CLIENT
                       <Icon name="unfold_more" size="sm" />
                     </button>
-                  </th>
-                  <th className="px-6 py-4 text-left">
+                  </TableHead>
+                  <TableHead className="px-6 py-4">
                     <span className="text-[13px] font-bold text-mid-zinc uppercase tracking-[0.05em]">
                       DATE RANGE
                     </span>
-                  </th>
-                  <th className="px-6 py-4 text-left">
+                  </TableHead>
+                  <TableHead className="px-6 py-4">
                     <button className="flex items-center gap-2 text-[13px] font-bold text-mid-zinc uppercase tracking-[0.05em]">
                       BUDGET
                       <Icon name="unfold_more" size="sm" />
                     </button>
-                  </th>
-                  <th className="px-6 py-4 text-left">
+                  </TableHead>
+                  <TableHead className="px-6 py-4">
                     <span className="text-[13px] font-bold text-mid-zinc uppercase tracking-[0.05em]">
                       STATUS
                     </span>
-                  </th>
-                  <th className="px-6 py-4 text-left">
+                  </TableHead>
+                  <TableHead className="px-6 py-4">
                     <span className="text-[13px] font-bold text-mid-zinc uppercase tracking-[0.05em]">
                       CHANNELS
                     </span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((plan, i) => (
-                  <tr
-                    key={plan.id}
-                    className={`border-b border-zinc-border/20 hover:bg-corsair-wash/50 transition-colors ${
-                      i % 2 === 1 ? 'bg-canvas-fog' : ''
-                    }`}
-                  >
-                    <td className="px-6 py-4">
-                      <span className="text-[15px] font-medium text-deep-ink hover:text-corsair cursor-pointer transition-colors">
-                        {plan.name}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-[15px] text-mid-zinc">
-                      {plan.client}
-                    </td>
-                    <td className="px-6 py-4 metric-lock text-[15px] text-muted-zinc">
-                      {formatDateRange(plan.startDate, plan.endDate)}
-                    </td>
-                    <td className="px-6 py-4 metric-lock text-[15px] font-medium text-deep-ink">
-                      {formatCurrency(plan.budget)}
-                    </td>
-                    <td className="px-6 py-4">
-                      <span
-                        className={`px-3 py-1 rounded-full text-[13px] font-medium capitalize ${statusColors[plan.status]}`}
-                      >
-                        {plan.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex gap-2">
-                        {plan.channels.slice(0, 2).map((ch) => (
-                          <span
-                            key={ch}
-                            className="px-2 py-0.5 bg-paused-surface rounded text-[12px] font-medium text-mid-zinc"
-                          >
-                            {ch}
-                          </span>
-                        ))}
-                        {plan.channels.length > 2 && (
-                          <span className="text-[12px] text-muted-zinc">
-                            +{plan.channels.length - 2}
-                          </span>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filtered.map((plan, i) => {
+                  const colors = statusColors[plan.status];
+                  return (
+                    <TableRow
+                      key={plan.id}
+                      className={`border-b border-zinc-border/20 hover:bg-corsair-wash/50 ${
+                        i % 2 === 1 ? 'bg-canvas-fog' : ''
+                      }`}
+                    >
+                      <TableCell className="px-6 py-4">
+                        <span className="text-[15px] font-medium text-deep-ink hover:text-corsair cursor-pointer transition-colors">
+                          {plan.name}
+                        </span>
+                      </TableCell>
+                      <TableCell className="px-6 py-4 text-[15px] text-mid-zinc">
+                        {plan.client}
+                      </TableCell>
+                      <TableCell className="px-6 py-4 metric-lock text-[15px] text-muted-zinc">
+                        {formatDateRange(plan.startDate, plan.endDate)}
+                      </TableCell>
+                      <TableCell className="px-6 py-4 metric-lock text-[15px] font-medium text-deep-ink">
+                        {formatCurrency(plan.budget)}
+                      </TableCell>
+                      <TableCell className="px-6 py-4">
+                        <Badge
+                          className={`${colors?.bg} ${colors?.text} border-0 rounded-full text-[13px] font-medium capitalize px-3 py-1 h-auto`}
+                        >
+                          {plan.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="px-6 py-4">
+                        <div className="flex gap-2">
+                          {plan.channels.slice(0, 2).map((ch) => (
+                            <Badge
+                              key={ch}
+                              variant="secondary"
+                              className="bg-paused-surface text-mid-zinc border-0 rounded text-[12px] font-medium h-auto"
+                            >
+                              {ch}
+                            </Badge>
+                          ))}
+                          {plan.channels.length > 2 && (
+                            <span className="text-[12px] text-muted-zinc">
+                              +{plan.channels.length - 2}
+                            </span>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
 
             {filtered.length === 0 && (
               <div className="flex flex-col items-center justify-center py-16">
@@ -227,52 +239,58 @@ export default function MediaPlans() {
                 </p>
               </div>
             )}
-          </div>
+          </Card>
         )}
 
         {/* Card View */}
         {view === 'cards' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((plan) => (
-              <div
-                key={plan.id}
-                className="bg-white rounded-2xl p-6 border border-zinc-border/30 hover:shadow-lg transition-shadow cursor-pointer"
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[15px] font-medium text-deep-ink">{plan.name}</span>
-                  <span
-                    className={`px-3 py-1 rounded-full text-[13px] font-medium capitalize ${statusColors[plan.status]}`}
-                  >
-                    {plan.status}
-                  </span>
-                </div>
-                <p className="text-[15px] text-mid-zinc mb-4">{plan.client}</p>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-sm text-mid-zinc">Budget</span>
-                    <span className="metric-lock text-sm font-medium text-deep-ink">
-                      {formatCurrency(plan.budget)}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-mid-zinc">Duration</span>
-                    <span className="metric-lock text-sm text-muted-zinc">
-                      {formatDateRange(plan.startDate, plan.endDate)}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex gap-2 mt-6">
-                  {plan.channels.map((ch) => (
-                    <span
-                      key={ch}
-                      className="px-2 py-0.5 bg-corsair-wash rounded text-[12px] font-medium text-corsair"
-                    >
-                      {ch}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            {filtered.map((plan) => {
+              const colors = statusColors[plan.status];
+              return (
+                <Card
+                  key={plan.id}
+                  className="bg-white border-zinc-border/30 ring-0 hover:shadow-lg transition-shadow cursor-pointer rounded-2xl gap-0"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[15px] font-medium text-deep-ink">{plan.name}</span>
+                      <Badge
+                        className={`${colors?.bg} ${colors?.text} border-0 rounded-full text-[13px] font-medium capitalize px-3 py-1 h-auto`}
+                      >
+                        {plan.status}
+                      </Badge>
+                    </div>
+                    <p className="text-[15px] text-mid-zinc mb-4">{plan.client}</p>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-sm text-mid-zinc">Budget</span>
+                        <span className="metric-lock text-sm font-medium text-deep-ink">
+                          {formatCurrency(plan.budget)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-mid-zinc">Duration</span>
+                        <span className="metric-lock text-sm text-muted-zinc">
+                          {formatDateRange(plan.startDate, plan.endDate)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex gap-2 mt-6">
+                      {plan.channels.map((ch) => (
+                        <Badge
+                          key={ch}
+                          variant="secondary"
+                          className="bg-corsair-wash text-corsair border-0 rounded text-[12px] font-medium h-auto"
+                        >
+                          {ch}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
 
             {filtered.length === 0 && (
               <div className="col-span-full flex flex-col items-center justify-center py-16">

@@ -1,5 +1,19 @@
 import { Link } from 'react-router-dom';
 import { mockMediaPlans, formatCurrency, formatDateRange } from '../data/mock-data';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { Separator } from '@/components/ui/separator';
 import Icon from '../components/Icon';
 
 const activePlans = mockMediaPlans.filter((p) => p.status === 'active');
@@ -42,11 +56,11 @@ const stats = [
   },
 ] as const;
 
-const statusColors: Readonly<Record<string, string>> = {
-  active: 'bg-active-surface text-active-text',
-  draft: 'bg-draft-surface text-draft-text',
-  completed: 'bg-completed-surface text-completed-text',
-  paused: 'bg-paused-surface text-paused-text',
+const statusBadgeVariant: Readonly<Record<string, { bg: string; text: string }>> = {
+  active: { bg: 'bg-active-surface', text: 'text-active-text' },
+  draft: { bg: 'bg-draft-surface', text: 'text-draft-text' },
+  completed: { bg: 'bg-completed-surface', text: 'text-completed-text' },
+  paused: { bg: 'bg-paused-surface', text: 'text-paused-text' },
 };
 
 export default function Dashboard() {
@@ -63,26 +77,36 @@ export default function Dashboard() {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 bg-white border border-zinc-border/50 rounded-lg px-3 py-1.5 shadow-sm">
             <Icon name="search" className="text-muted-zinc text-lg" />
-            <input
-              className="border-none focus:ring-0 text-sm p-0 w-48 bg-transparent placeholder:text-muted-zinc/60"
+            <Input
+              className="border-none focus-visible:ring-0 focus-visible:border-transparent text-sm p-0 h-auto w-48 bg-transparent placeholder:text-muted-zinc/60"
               placeholder="Search data..."
               type="text"
             />
           </div>
-          <button className="p-2 text-mid-zinc hover:text-corsair transition-transform active:scale-95">
-            <Icon name="history" />
-          </button>
-          <div className="relative p-2 text-mid-zinc hover:text-corsair transition-transform active:scale-95">
-            <Icon name="notifications" />
-            <span className="absolute top-2 right-2 w-2 h-2 bg-error-text rounded-full border-2 border-canvas-fog" />
-          </div>
-          <div className="h-8 w-px bg-zinc-border/50 mx-2" />
-          <button className="px-4 py-2 bg-white border border-zinc-border/50 rounded-lg text-sm font-medium text-mid-zinc hover:bg-slate-50 transition-colors">
+          <Tooltip>
+            <TooltipTrigger
+              render={<Button variant="ghost" size="icon" className="text-mid-zinc hover:text-corsair" />}
+            >
+              <Icon name="history" />
+            </TooltipTrigger>
+            <TooltipContent>History</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger
+              render={<Button variant="ghost" size="icon" className="relative text-mid-zinc hover:text-corsair" />}
+            >
+              <Icon name="notifications" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-error-text rounded-full border-2 border-canvas-fog" />
+            </TooltipTrigger>
+            <TooltipContent>Notifications</TooltipContent>
+          </Tooltip>
+          <Separator orientation="vertical" className="h-8 mx-2" />
+          <Button variant="outline" className="text-mid-zinc">
             Share
-          </button>
-          <button className="px-4 py-2 corsair-gradient text-white rounded-lg text-sm font-medium hover:brightness-110 transition-colors shadow-sm">
+          </Button>
+          <Button className="corsair-gradient text-white hover:brightness-110 shadow-sm">
             Export Data
-          </button>
+          </Button>
         </div>
       </header>
 
@@ -91,26 +115,28 @@ export default function Dashboard() {
         {/* Summary Stats */}
         <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {stats.map((stat) => (
-            <div
+            <Card
               key={stat.label}
-              className="bg-white p-6 rounded-xl border border-zinc-border/50 flex flex-col gap-2"
+              className="bg-white border-zinc-border/50 ring-0 gap-2"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-mid-zinc uppercase tracking-wider">
-                  {stat.label}
-                </span>
-                <div className={`h-2 w-2 rounded-full ${stat.dotColor}`} />
-              </div>
-              <div className="metric-lock text-3xl font-semibold text-deep-ink">
-                {stat.value}
-              </div>
-              <div className={`flex items-center text-[11px] ${stat.subColor} metric-lock`}>
-                {stat.subIcon && (
-                  <Icon name={stat.subIcon} size="sm" className="mr-1" />
-                )}
-                {stat.sub}
-              </div>
-            </div>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium text-mid-zinc uppercase tracking-wider">
+                    {stat.label}
+                  </span>
+                  <div className={`h-2 w-2 rounded-full ${stat.dotColor}`} />
+                </div>
+                <div className="metric-lock text-3xl font-semibold text-deep-ink mt-2">
+                  {stat.value}
+                </div>
+                <div className={`flex items-center text-[11px] ${stat.subColor} metric-lock mt-2`}>
+                  {stat.subIcon && (
+                    <Icon name={stat.subIcon} size="sm" className="mr-1" />
+                  )}
+                  {stat.sub}
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </section>
 
@@ -157,69 +183,71 @@ export default function Dashboard() {
         </section>
 
         {/* Recent Media Plans Table */}
-        <section className="bg-white rounded-xl border border-zinc-border/50 shadow-sm overflow-hidden">
+        <Card className="bg-white border-zinc-border/50 ring-0 shadow-sm gap-0">
           <div className="px-8 py-6 flex items-center justify-between">
             <h3 className="text-lg font-semibold text-deep-ink">Recent Media Plans</h3>
             <Link to="/plans" className="text-sm font-medium text-corsair hover:underline">
               View all
             </Link>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-slate-50/80">
-                  <th className="px-8 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
-                    Plan Name
-                  </th>
-                  <th className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
-                    Client
-                  </th>
-                  <th className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
-                    Budget
-                  </th>
-                  <th className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
-                    Status
-                  </th>
-                  <th className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
-                    Channels
-                  </th>
-                  <th className="px-8 py-4" />
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-100/50">
-                {mockMediaPlans.slice(0, 5).map((plan, i) => (
-                  <tr
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-slate-50/80 hover:bg-slate-50/80">
+                <TableHead className="px-8 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
+                  Plan Name
+                </TableHead>
+                <TableHead className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
+                  Client
+                </TableHead>
+                <TableHead className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
+                  Budget
+                </TableHead>
+                <TableHead className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
+                  Status
+                </TableHead>
+                <TableHead className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
+                  Channels
+                </TableHead>
+                <TableHead className="px-8 py-4" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {mockMediaPlans.slice(0, 5).map((plan, i) => {
+                const colors = statusBadgeVariant[plan.status];
+                return (
+                  <TableRow
                     key={plan.id}
-                    className={`hover:bg-slate-50/50 transition-colors ${
+                    className={`hover:bg-slate-50/50 ${
                       i % 2 === 1 ? 'bg-slate-50/30' : ''
                     }`}
                   >
-                    <td className="px-8 py-5">
+                    <TableCell className="px-8 py-5">
                       <div className="font-medium text-deep-ink">{plan.name}</div>
                       <div className="metric-lock text-[10px] text-muted-zinc mt-0.5">
                         {formatDateRange(plan.startDate, plan.endDate)}
                       </div>
-                    </td>
-                    <td className="px-6 py-5 text-sm text-mid-zinc">{plan.client}</td>
-                    <td className="px-6 py-5 metric-lock text-sm font-medium text-deep-ink">
+                    </TableCell>
+                    <TableCell className="px-6 py-5 text-sm text-mid-zinc">{plan.client}</TableCell>
+                    <TableCell className="px-6 py-5 metric-lock text-sm font-medium text-deep-ink">
                       {formatCurrency(plan.budget)}
-                    </td>
-                    <td className="px-6 py-5">
-                      <span
-                        className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tight ${statusColors[plan.status]}`}
+                    </TableCell>
+                    <TableCell className="px-6 py-5">
+                      <Badge
+                        className={`${colors?.bg} ${colors?.text} border-0 rounded-full text-[10px] font-bold uppercase tracking-tight px-3 py-1 h-auto`}
                       >
                         {plan.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-5">
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="px-6 py-5">
                       <div className="flex gap-2">
                         {plan.channels.slice(0, 2).map((ch) => (
-                          <span
+                          <Badge
                             key={ch}
-                            className="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-mid-zinc"
+                            variant="secondary"
+                            className="bg-slate-100 text-mid-zinc border-0 rounded text-[10px] font-medium h-auto"
                           >
                             {ch}
-                          </span>
+                          </Badge>
                         ))}
                         {plan.channels.length > 2 && (
                           <span className="text-[10px] text-muted-zinc">
@@ -227,18 +255,18 @@ export default function Dashboard() {
                           </span>
                         )}
                       </div>
-                    </td>
-                    <td className="px-8 py-5 text-right">
-                      <button className="text-muted-zinc hover:text-corsair transition-colors">
+                    </TableCell>
+                    <TableCell className="px-8 py-5 text-right">
+                      <Button variant="ghost" size="icon-sm" className="text-muted-zinc hover:text-corsair">
                         <Icon name="more_horiz" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Card>
       </div>
     </div>
   );
