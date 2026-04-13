@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { mockMediaPlans, formatCurrency } from '../data/mock-data';
+import { mockMediaPlans, formatCurrency, formatDateRange } from '../data/mock-data';
 import Icon from '../components/Icon';
 
 const activePlans = mockMediaPlans.filter((p) => p.status === 'active');
@@ -11,202 +11,226 @@ const stats = [
   {
     label: 'Active Campaigns',
     value: activePlans.length.toString(),
-    trend: `+1 this month`,
-    trendColor: 'text-emerald-600 bg-emerald-100/50',
+    sub: '+1 from last month',
+    subIcon: 'trending_up',
+    subColor: 'text-active-text',
+    dotColor: 'bg-corsair',
   },
   {
     label: 'Total Budget',
     value: formatCurrency(totalBudget),
-    trend: null,
-    trendColor: '',
+    sub: 'Allocated for Q3-Q4',
+    subIcon: null,
+    subColor: 'text-slate-400',
+    dotColor: 'bg-active-text',
   },
   {
     label: 'Active Spend',
     value: formatCurrency(activeBudget),
-    trend: null,
-    trendColor: '',
+    sub: 'Current monthly burn',
+    subIcon: null,
+    subColor: 'text-slate-400',
+    dotColor: 'bg-draft-text',
   },
   {
     label: 'Draft Plans',
     value: draftCount.toString(),
-    trend: 'Awaiting review',
-    trendColor: 'text-amber-600 bg-amber-100/50',
+    sub: 'Awaiting approval',
+    subIcon: null,
+    subColor: 'text-slate-400',
+    dotColor: 'bg-zinc-400',
   },
-];
+] as const;
 
-const statusColors: Record<string, string> = {
-  active: 'bg-emerald-100 text-emerald-700',
-  draft: 'bg-amber-100 text-amber-700',
-  completed: 'bg-blue-100 text-blue-700',
-  paused: 'bg-slate-200 text-slate-600',
-  planning: 'bg-blue-100 text-blue-700',
+const statusColors: Readonly<Record<string, string>> = {
+  active: 'bg-active-surface text-active-text',
+  draft: 'bg-draft-surface text-draft-text',
+  completed: 'bg-completed-surface text-completed-text',
+  paused: 'bg-paused-surface text-paused-text',
 };
-
-const planIcons: Record<string, string> = {
-  '1': 'rocket_launch',
-  '2': 'sunny',
-  '3': 'celebration',
-  '4': 'fitness_center',
-  '5': 'school',
-  '6': 'eco',
-  '7': 'public',
-  '8': 'smartphone',
-  '9': 'podcasts',
-  '10': 'group',
-};
-
-const quickActions = [
-  {
-    to: '/chat',
-    icon: 'chat',
-    bgIcon: 'auto_awesome',
-    title: 'Start Planning Chat',
-    desc: 'Let AI help you optimize your Q4 allocation',
-    bg: 'bg-primary',
-  },
-  {
-    to: '/files',
-    icon: 'upload_file',
-    bgIcon: 'cloud_upload',
-    title: 'Upload Files',
-    desc: 'Ingest raw media specs and cost sheets',
-    bg: 'bg-tertiary-container',
-  },
-  {
-    to: '/plans',
-    icon: 'visibility',
-    bgIcon: 'list_alt',
-    title: 'View All Plans',
-    desc: 'Access your full historical archive',
-    bg: 'bg-secondary',
-  },
-];
 
 export default function Dashboard() {
   return (
-    <div className="p-8 space-y-8 max-w-7xl mx-auto w-full">
-      {/* Page Header */}
-      <section className="flex flex-col gap-1">
-        <h2 className="text-3xl font-extrabold tracking-tight text-on-surface">Dashboard</h2>
-        <p className="text-on-surface-variant font-medium">
-          Overview of your media planning activity
-        </p>
-      </section>
+    <div className="flex flex-col min-h-screen">
+      {/* Top bar */}
+      <header className="flex justify-between items-center w-full px-8 py-6 sticky top-0 bg-canvas-fog/80 backdrop-blur-md z-40">
+        <div>
+          <h2 className="text-2xl font-semibold text-deep-ink">Dashboard</h2>
+          <p className="text-sm text-mid-zinc font-normal">
+            AI-Powered planning overview and performance metrics.
+          </p>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 bg-white border border-zinc-border/50 rounded-lg px-3 py-1.5 shadow-sm">
+            <Icon name="search" className="text-muted-zinc text-lg" />
+            <input
+              className="border-none focus:ring-0 text-sm p-0 w-48 bg-transparent placeholder:text-muted-zinc/60"
+              placeholder="Search data..."
+              type="text"
+            />
+          </div>
+          <button className="p-2 text-mid-zinc hover:text-corsair transition-transform active:scale-95">
+            <Icon name="history" />
+          </button>
+          <div className="relative p-2 text-mid-zinc hover:text-corsair transition-transform active:scale-95">
+            <Icon name="notifications" />
+            <span className="absolute top-2 right-2 w-2 h-2 bg-error-text rounded-full border-2 border-canvas-fog" />
+          </div>
+          <div className="h-8 w-px bg-zinc-border/50 mx-2" />
+          <button className="px-4 py-2 bg-white border border-zinc-border/50 rounded-lg text-sm font-medium text-mid-zinc hover:bg-slate-50 transition-colors">
+            Share
+          </button>
+          <button className="px-4 py-2 corsair-gradient text-white rounded-lg text-sm font-medium hover:brightness-110 transition-colors shadow-sm">
+            Export Data
+          </button>
+        </div>
+      </header>
 
-      {/* Stats Row: Tonal Layering */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat) => (
-          <div key={stat.label} className="bg-surface-container-low p-1 rounded-xl">
-            <div className="bg-surface-container-lowest p-6 rounded-[10px] shadow-sm hover:shadow-md transition-shadow">
-              <p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant/70 mb-1">
-                {stat.label}
-              </p>
-              <div className="flex items-end justify-between">
-                <span className="text-3xl font-bold text-on-surface">{stat.value}</span>
-                {stat.trend && (
-                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${stat.trendColor}`}>
-                    {stat.trend}
-                  </span>
+      {/* Dashboard content */}
+      <div className="px-8 pb-12 space-y-8">
+        {/* Summary Stats */}
+        <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-white p-6 rounded-xl border border-zinc-border/50 flex flex-col gap-2"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-mid-zinc uppercase tracking-wider">
+                  {stat.label}
+                </span>
+                <div className={`h-2 w-2 rounded-full ${stat.dotColor}`} />
+              </div>
+              <div className="metric-lock text-3xl font-semibold text-deep-ink">
+                {stat.value}
+              </div>
+              <div className={`flex items-center text-[11px] ${stat.subColor} metric-lock`}>
+                {stat.subIcon && (
+                  <Icon name={stat.subIcon} size="sm" className="mr-1" />
                 )}
+                {stat.sub}
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </section>
 
-      {/* Quick Actions: Gradient Bento Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {quickActions.map((action) => (
+        {/* Quick Actions */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Link
-            key={action.to}
-            to={action.to}
-            className={`group relative overflow-hidden ${action.bg} p-6 rounded-xl text-left transition-all hover:scale-[1.02] active:scale-[0.98]`}
+            to="/chat"
+            className="bg-corsair-wash p-8 rounded-xl flex items-center gap-6 group hover:bg-corsair-wash/80 transition-all text-left"
           >
-            <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Icon name={action.bgIcon} filled className="text-[120px] text-white" />
+            <div className="h-14 w-14 bg-white rounded-full flex items-center justify-center text-corsair shadow-sm group-hover:scale-110 transition-transform shrink-0">
+              <Icon name="chat" size="lg" />
             </div>
-            <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mb-4">
-              <Icon name={action.icon} className="text-white" />
+            <div>
+              <h3 className="text-lg font-semibold text-corsair">Start Planning Chat</h3>
+              <p className="text-sm text-corsair/70">Let AI suggest your next channel mix</p>
             </div>
-            <h3 className="text-lg font-bold text-white mb-1">{action.title}</h3>
-            <p className="text-white/70 text-sm">{action.desc}</p>
           </Link>
-        ))}
-      </div>
 
-      {/* Recent Media Plans Table */}
-      <section className="bg-surface-container-low p-1 rounded-xl">
-        <div className="bg-surface-container-lowest rounded-[10px] overflow-hidden shadow-sm">
-          <div className="p-6 border-b border-outline-variant/10 flex justify-between items-center">
-            <h3 className="text-xl font-bold text-on-surface">Recent Media Plans</h3>
-            <Link to="/plans" className="text-primary text-sm font-semibold hover:underline">
-              Export CSV
+          <Link
+            to="/files"
+            className="bg-active-surface p-8 rounded-xl flex items-center gap-6 group hover:bg-active-surface/80 transition-all text-left min-h-[140px]"
+          >
+            <div className="h-14 w-14 bg-white rounded-full flex items-center justify-center text-active-text shadow-sm group-hover:scale-110 transition-transform shrink-0">
+              <Icon name="upload_file" size="lg" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-active-text">Upload Media Files</h3>
+              <p className="text-sm text-active-text/70">Import existing schedules or assets</p>
+            </div>
+          </Link>
+
+          <Link
+            to="/plans"
+            className="bg-paused-surface p-8 rounded-xl flex items-center gap-6 group hover:bg-zinc-border transition-all text-left"
+          >
+            <div className="h-14 w-14 bg-white rounded-full flex items-center justify-center text-mid-zinc shadow-sm group-hover:scale-110 transition-transform shrink-0">
+              <Icon name="description" size="lg" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-deep-ink">View All Plans</h3>
+              <p className="text-sm text-mid-zinc">Browse historical and draft archives</p>
+            </div>
+          </Link>
+        </section>
+
+        {/* Recent Media Plans Table */}
+        <section className="bg-white rounded-xl border border-zinc-border/50 shadow-sm overflow-hidden">
+          <div className="px-8 py-6 flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-deep-ink">Recent Media Plans</h3>
+            <Link to="/plans" className="text-sm font-medium text-corsair hover:underline">
+              View all
             </Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-surface-container-low/50">
-                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">
+                <tr className="bg-slate-50/80">
+                  <th className="px-8 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
                     Plan Name
                   </th>
-                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">
+                  <th className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
                     Client
                   </th>
-                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">
+                  <th className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
                     Budget
                   </th>
-                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">
+                  <th className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
                     Status
                   </th>
-                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant/70">
+                  <th className="px-6 py-4 text-[11px] font-semibold text-mid-zinc uppercase tracking-widest">
                     Channels
                   </th>
-                  <th className="px-6 py-4" />
+                  <th className="px-8 py-4" />
                 </tr>
               </thead>
-              <tbody className="divide-y divide-outline-variant/10">
-                {mockMediaPlans.slice(0, 5).map((plan) => (
-                  <tr key={plan.id} className="hover:bg-surface-container-low/30 transition-colors">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
-                          <Icon name={planIcons[plan.id] ?? 'description'} size="sm" />
-                        </div>
-                        <span className="font-semibold text-on-surface">{plan.name}</span>
+              <tbody className="divide-y divide-zinc-100/50">
+                {mockMediaPlans.slice(0, 5).map((plan, i) => (
+                  <tr
+                    key={plan.id}
+                    className={`hover:bg-slate-50/50 transition-colors ${
+                      i % 2 === 1 ? 'bg-slate-50/30' : ''
+                    }`}
+                  >
+                    <td className="px-8 py-5">
+                      <div className="font-medium text-deep-ink">{plan.name}</div>
+                      <div className="metric-lock text-[10px] text-muted-zinc mt-0.5">
+                        {formatDateRange(plan.startDate, plan.endDate)}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-on-surface-variant text-sm">{plan.client}</td>
-                    <td className="px-6 py-4 text-on-surface font-medium">
+                    <td className="px-6 py-5 text-sm text-mid-zinc">{plan.client}</td>
+                    <td className="px-6 py-5 metric-lock text-sm font-medium text-deep-ink">
                       {formatCurrency(plan.budget)}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-5">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter ${statusColors[plan.status]}`}
+                        className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tight ${statusColors[plan.status]}`}
                       >
                         {plan.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-5">
                       <div className="flex gap-2">
                         {plan.channels.slice(0, 2).map((ch) => (
                           <span
                             key={ch}
-                            className="px-2 py-0.5 bg-surface-container-high rounded text-[10px] font-bold text-secondary"
+                            className="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-mid-zinc"
                           >
                             {ch}
                           </span>
                         ))}
                         {plan.channels.length > 2 && (
-                          <span className="text-[10px] text-on-surface-variant">
+                          <span className="text-[10px] text-muted-zinc">
                             +{plan.channels.length - 2}
                           </span>
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-right">
-                      <button className="p-1 hover:bg-surface-container-high rounded-full transition-colors">
-                        <Icon name="more_vert" className="text-on-surface-variant" />
+                    <td className="px-8 py-5 text-right">
+                      <button className="text-muted-zinc hover:text-corsair transition-colors">
+                        <Icon name="more_horiz" />
                       </button>
                     </td>
                   </tr>
@@ -214,15 +238,8 @@ export default function Dashboard() {
               </tbody>
             </table>
           </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="text-center pb-4">
-        <p className="text-xs text-on-surface-variant/40 font-medium">
-          MediaPlan Pro &copy; 2024. Enterprise Edition v4.2.1
-        </p>
-      </footer>
+        </section>
+      </div>
     </div>
   );
 }

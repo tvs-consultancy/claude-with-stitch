@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediaPlan Pro | Precision Blueprint</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Geist', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .label-mono { font-family: 'Space Grotesk', sans-serif; }
+        
+        /* Tonal Depth Logic */
+        .tonal-depth-no-borders { border: none !important; }
+        .corsair-gradient {
+            background: linear-gradient(135deg, #174468 0%, #335C81 100%);
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+        }
+        .ambient-shadow {
+            box-shadow: 0px 12px 32px rgba(24, 24, 27, 0.06);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#174468",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#72e5b2",
+                        "on-surface-variant": "#42474e",
+                        "on-secondary-fixed-variant": "#46464e",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-primary": "#a2caf5",
+                        "on-background": "#1a1c1c",
+                        "secondary-fixed-dim": "#c6c5cf",
+                        "on-secondary-fixed": "#1a1b22",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container": "#eeeeee",
+                        "secondary": "#5d5e66",
+                        "on-secondary-container": "#63646c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-error": "#ffffff",
+                        "tertiary": "#004c33",
+                        "surface-tint": "#396187",
+                        "on-surface": "#1a1c1c",
+                        "outline-variant": "#c2c7cf",
+                        "surface": "#f9f9f9",
+                        "tertiary-fixed": "#85f8c4",
+                        "secondary-fixed": "#e3e1ec",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-tertiary-fixed": "#002114",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001d33",
+                        "surface-container-high": "#e8e8e8",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#cfe5ff",
+                        "tertiary-container": "#006646",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#acd4ff",
+                        "outline": "#72777f",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f9f9f9",
+                        "background": "#f9f9f9",
+                        "secondary-container": "#e3e1ec",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "on-primary-fixed-variant": "#1e4a6e",
+                        "primary-container": "#335c81",
+                        "primary-fixed-dim": "#a2caf5",
+                        "on-tertiary-fixed-variant": "#005137",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#68dba9"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-fixed">
+<!-- SideNavBar Shell -->
+<aside class="w-[260px] h-screen fixed left-0 top-0 bg-[#0F1117] flex flex-col h-full py-6 px-4 z-50">
+<!-- Brand Header -->
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg corsair-gradient flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg">calendar_view_month</span>
+</div>
+<div>
+<h1 class="text-xl font-semibold text-white tracking-tight">MediaPlan Pro</h1>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest font-medium">Precision Blueprint</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 font-normal hover:bg-white/5 hover:text-white transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm font-['Geist'] tracking-tight">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white font-medium transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">calendar_view_month</span>
+<span class="text-sm font-['Geist'] tracking-tight">Media Plans</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 font-normal hover:bg-white/5 hover:text-white transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+<span class="text-sm font-['Geist'] tracking-tight">Files</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 font-normal hover:bg-white/5 hover:text-white transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span class="text-sm font-['Geist'] tracking-tight">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 font-normal hover:bg-white/5 hover:text-white transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+<span class="text-sm font-['Geist'] tracking-tight">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 font-normal hover:bg-white/5 hover:text-white transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-['Geist'] tracking-tight">Settings</span>
+</a>
+</nav>
+<!-- Profile Footer -->
+<div class="mt-auto px-2">
+<div class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
+<img alt="Sarah Chen Profile" class="w-8 h-8 rounded-full bg-slate-800" data-alt="professional portrait of a woman with short dark hair in a minimalist office setting, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3_yvhbznLicCIA-EOwvRNlGhUc_mcvR4xli5A8nx6IO-tM_19nR-L4J2ad_yVgfj4Ww1drALArNYjUOR959xsSyhSBK66SvWFAIFqUR5nBJoYd0DBjQT6iCTqWuQoH3yXVOFiq7sUYbVI9TeSlvLOSa9-NQ3aKvKuc795YAY3gfG2ksIbg3HQAdCjJlqrw78I77NDWVpFRn4Q94FveMHaDcReT-ONldoFfK51oX5b261Sc3ixzG6OOoSSGgDibK9MycCd7RxA4q1t"/>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-medium text-white truncate">Sarah Chen</p>
+<p class="text-[11px] text-slate-500 truncate">Senior Planner</p>
+</div>
+<span class="material-symbols-outlined text-slate-600 text-sm">more_vert</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="pl-[260px] min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-[260px] h-16 glass-header flex justify-between items-center px-8 z-40 transition-all">
+<div class="flex items-center gap-2">
+<span class="text-xs font-['Geist'] tracking-tight text-slate-500">Workspace / </span>
+<span class="text-sm font-semibold font-['Geist'] tracking-tight text-primary">Media Plans</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+<input class="h-9 w-64 bg-slate-100 border-none rounded-lg pl-9 pr-4 text-xs focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Quick search..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-slate-500">
+<button class="hover:text-slate-900 transition-colors focus:ring-2 focus:ring-sky-500/20 rounded-md p-1">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+<button class="hover:text-slate-900 transition-colors focus:ring-2 focus:ring-sky-500/20 rounded-md p-1">
+<span class="material-symbols-outlined text-[22px]">help_outline</span>
+</button>
+</div>
+<button class="corsair-gradient text-white px-4 py-2 rounded-lg text-sm font-medium transition-transform active:scale-95">
+                    Create Plan
+                </button>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="pt-24 pb-12 px-10 max-w-7xl mx-auto">
+<!-- Page Header Area -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-[24px] font-semibold text-[#0F1117] tracking-tight leading-none mb-2">Media Plans</h2>
+<p class="text-sm text-[#71717A]">12 Active Plans in Workspace</p>
+</div>
+<!-- View Toggle Pill -->
+<div class="bg-[#F4F4F5] p-1 rounded-xl flex items-center">
+<button class="flex items-center gap-2 px-4 py-1.5 bg-white rounded-lg shadow-sm text-sm font-medium text-slate-900 transition-all">
+<span class="material-symbols-outlined text-[18px]">view_list</span>
+                        Table
+                    </button>
+<button class="flex items-center gap-2 px-4 py-1.5 text-slate-500 text-sm font-medium hover:text-slate-700 transition-all">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+                        Cards
+                    </button>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+<input class="h-10 w-[288px] bg-[#F4F4F5] border-none rounded-lg pl-10 pr-4 text-sm outline-none focus:ring-2 focus:ring-primary/10" placeholder="Filter plans by name or client..." type="text"/>
+</div>
+<div class="relative">
+<select class="h-10 w-[160px] bg-[#F4F4F5] border-none rounded-lg px-4 text-sm outline-none focus:ring-2 focus:ring-primary/10 appearance-none text-slate-600">
+<option>Status: All</option>
+<option>Active</option>
+<option>Draft</option>
+<option>Completed</option>
+<option>Paused</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<div class="mono text-[13px] text-[#71717A] tracking-tighter">
+                    12 plans
+                </div>
+</div>
+<!-- Main Data Table -->
+<div class="bg-white rounded-[16px] ambient-shadow overflow-hidden">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-[#F4F4F5]">
+<th class="px-6 py-4 text-left">
+<button class="flex items-center gap-2 label-mono text-[13px] font-bold text-[#71717A] uppercase tracking-[0.05em]">
+                                    PLAN NAME
+                                    <span class="material-symbols-outlined text-[16px]">unfold_more</span>
+</button>
+</th>
+<th class="px-6 py-4 text-left">
+<button class="flex items-center gap-2 label-mono text-[13px] font-bold text-[#71717A] uppercase tracking-[0.05em]">
+                                    CLIENT
+                                    <span class="material-symbols-outlined text-[16px]">unfold_more</span>
+</button>
+</th>
+<th class="px-6 py-4 text-left">
+<button class="flex items-center gap-2 label-mono text-[13px] font-bold text-[#71717A] uppercase tracking-[0.05em]">
+                                    DATE RANGE
+                                    <span class="material-symbols-outlined text-[16px]">unfold_more</span>
+</button>
+</th>
+<th class="px-6 py-4 text-left">
+<button class="flex items-center gap-2 label-mono text-[13px] font-bold text-[#71717A] uppercase tracking-[0.05em]">
+                                    BUDGET
+                                    <span class="material-symbols-outlined text-[16px]">unfold_more</span>
+</button>
+</th>
+<th class="px-6 py-4 text-left label-mono text-[13px] font-bold text-[#71717A] uppercase tracking-[0.05em]">
+                                STATUS
+                            </th>
+<th class="px-6 py-4 text-left label-mono text-[13px] font-bold text-[#71717A] uppercase tracking-[0.05em]">
+                                CHANNELS
+                            </th>
+</tr>
+</thead>
+<tbody class="divide-none">
+<!-- Row 1 -->
+<tr class="bg-[#FAFAFA] hover:bg-[#EBF0F7]/50 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="text-[15px] font-medium text-[#0F1117] font-['Geist']">Meridian Q2 Digital Push</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#71717A]">Meridian Media Group</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-xs text-[#71717A] uppercase">Mar 1 - Jun 30, 2025</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-sm font-medium">$847,500</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700">ACTIVE</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">Social</span>
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">Search</span>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-white hover:bg-[#EBF0F7]/50 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="text-[15px] font-medium text-[#0F1117] font-['Geist']">Voss Automotive Launch</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#71717A]">Voss Motors</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-xs text-[#71717A] uppercase">Apr 15 - Dec 31, 2025</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-sm font-medium">$1,245,000</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700">ACTIVE</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">OOH</span>
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">TV</span>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="bg-[#FAFAFA] hover:bg-[#EBF0F7]/50 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="text-[15px] font-medium text-[#0F1117] font-['Geist']">Hale Brand Refresh</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#71717A]">Hale &amp; Partners</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-xs text-[#71717A] uppercase">Aug 1 - Sep 30, 2025</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-sm font-medium">$425,000</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700">DRAFT</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">Display</span>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-white hover:bg-[#EBF0F7]/50 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="text-[15px] font-medium text-[#0F1117] font-['Geist']">Apex Summer Campaign</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#71717A]">Apex Athletics</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-xs text-[#71717A] uppercase">Jun 1 - Aug 31, 2025</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-sm font-medium">$678,300</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-blue-700">COMPLETED</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">Meta</span>
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">OOH</span>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="bg-[#FAFAFA] hover:bg-[#EBF0F7]/50 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="text-[15px] font-medium text-[#0F1117] font-['Geist']">Caliber Financial Q3</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#71717A]">Caliber Wealth</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-xs text-[#71717A] uppercase">Jul 1 - Sep 30, 2025</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-sm font-medium">$892,000</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700">ACTIVE</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">Search</span>
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">LinkedIn</span>
+</div>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="bg-white hover:bg-[#EBF0F7]/50 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="text-[15px] font-medium text-[#0F1117] font-['Geist']">Fern &amp; Bower Holiday</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#71717A]">Fern &amp; Bower Retail</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-xs text-[#71717A] uppercase">Oct 1 - Dec 24, 2025</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-sm font-medium">$1,125,000</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700">DRAFT</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">TV</span>
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">Digital</span>
+</div>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="bg-[#FAFAFA] hover:bg-[#EBF0F7]/50 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="text-[15px] font-medium text-[#0F1117] font-['Geist']">Trident Global Rebrand</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#71717A]">Trident Communications</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-xs text-[#71717A] uppercase">Jan 1 - Dec 31, 2025</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-sm font-medium">$2,340,000</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">PAUSED</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">Global</span>
+</div>
+</td>
+</tr>
+<!-- Row 8 -->
+<tr class="bg-white hover:bg-[#EBF0F7]/50 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="text-[15px] font-medium text-[#0F1117] font-['Geist']">Lumen Health Awareness</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm text-[#71717A]">Lumen Therapeutics</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-xs text-[#71717A] uppercase">May 1 - Oct 31, 2025</div>
+</td>
+<td class="px-6 py-4">
+<div class="mono text-sm font-medium">$567,800</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-blue-700">COMPLETED</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">Radio</span>
+<span class="px-2 py-0.5 rounded-[6px] bg-[#F4F4F5] text-[#71717A] text-[11px] font-medium">Local</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination / Table Footer -->
+<div class="px-8 py-4 bg-[#F4F4F5] flex justify-between items-center">
+<p class="text-xs text-[#71717A] font-medium">Showing 8 of 12 active media plans</p>
+<div class="flex items-center gap-2">
+<button class="p-1 rounded hover:bg-white transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<span class="mono text-xs font-bold text-[#0F1117]">1</span>
+<button class="p-1 rounded hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

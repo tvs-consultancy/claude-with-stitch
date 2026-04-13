@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediaPlan Pro | Media Architect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;family=Space+Grotesk:wght@300..700&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .user-bubble {
+            border-radius: 16px 16px 4px 16px;
+        }
+        .assistant-bubble {
+            border-radius: 16px 16px 16px 4px;
+        }
+        body {
+            font-family: 'Geist', sans-serif;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .label-text {
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#f0f1f1",
+                    "secondary": "#5d5e65",
+                    "primary-fixed-dim": "#a2caf5",
+                    "on-secondary-fixed": "#191b22",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container-high": "#e8e8e8",
+                    "tertiary": "#5a3b00",
+                    "on-surface": "#1a1c1c",
+                    "primary": "#335C81",
+                    "on-secondary-fixed-variant": "#45464e",
+                    "surface": "#f9f9f9",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#acd4ff",
+                    "inverse-surface": "#2f3131",
+                    "secondary-fixed-dim": "#c5c6ce",
+                    "surface-bright": "#f9f9f9",
+                    "tertiary-fixed": "#ffddb0",
+                    "on-tertiary-fixed-variant": "#614002",
+                    "tertiary-container": "#755215",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "background": "#FAFAFA",
+                    "primary-container": "#174468",
+                    "surface-tint": "#396187",
+                    "on-tertiary-fixed": "#281800",
+                    "surface-dim": "#dadada",
+                    "primary-fixed": "#cfe5ff",
+                    "on-secondary-container": "#63646c",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "inverse-primary": "#a2caf5",
+                    "on-primary-fixed-variant": "#1e4a6e",
+                    "outline-variant": "#c2c7cf",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-error": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "secondary-fixed": "#e2e2eb",
+                    "on-tertiary-container": "#f8c880",
+                    "tertiary-fixed-dim": "#eebf77",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#001d33",
+                    "secondary-container": "#e2e2eb",
+                    "surface-container": "#eeeeee",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#72777f",
+                    "on-surface-variant": "#42474e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface flex h-screen overflow-hidden">
+<!-- SIDE NAV BAR (GLOBAL) -->
+<!-- Predicted Component Structure based on JSON -->
+<aside class="fixed left-0 top-0 h-screen w-[260px] bg-[#0F1117] flex flex-col justify-between py-6 z-50">
+<div class="px-6">
+<div class="flex items-center gap-3 mb-10">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="architecture">architecture</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-white tracking-tight">MediaPlan Pro</h1>
+<p class="text-[10px] mono uppercase tracking-wider text-slate-500">Media Architect</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/10 transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white border-l-4 border-[#335C81] bg-white/5 transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-medium text-sm">Chat</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/10 transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+<span class="font-medium text-sm">Folder</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/10 transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-medium text-sm">Description</span>
+</a>
+</nav>
+</div>
+<div class="px-6">
+<div class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-colors duration-200 cursor-pointer">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400" data-icon="account_circle">account_circle</span>
+</div>
+<span class="text-sm font-medium text-white">Sarah Chen</span>
+</div>
+</div>
+</aside>
+<!-- CONVERSATION SIDEBAR -->
+<aside class="ml-[260px] w-[280px] h-screen bg-surface-container-lowest border-r border-zinc-200/50 flex flex-col z-40">
+<div class="p-6">
+<button class="w-full h-11 bg-primary text-white rounded-[10px] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-xl" data-icon="add">add</span>
+<span class="text-sm font-semibold">New Conversation</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<div class="px-2 py-2">
+<div class="group relative px-4 py-3 bg-[#EBF0F7] border-l-[3px] border-primary mb-1 cursor-pointer">
+<p class="text-sm font-semibold text-primary truncate">Q2 Digital Strategy Review</p>
+<p class="text-[10px] mono text-slate-400 mt-1 uppercase">Today</p>
+</div>
+<div class="group px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer mb-1 border-l-[3px] border-transparent">
+<p class="text-sm font-medium text-on-surface truncate">Voss Campaign Budget Analysis</p>
+<p class="text-[10px] mono text-slate-400 mt-1 uppercase">Yesterday</p>
+</div>
+<div class="group px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer mb-1 border-l-[3px] border-transparent">
+<p class="text-sm font-medium text-on-surface truncate">Cross-Channel Attribution Model</p>
+<p class="text-[10px] mono text-slate-400 mt-1 uppercase">Oct 24</p>
+</div>
+<div class="group px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer mb-1 border-l-[3px] border-transparent">
+<p class="text-sm font-medium text-on-surface truncate">Hale Brand Refresh Brief</p>
+<p class="text-[10px] mono text-slate-400 mt-1 uppercase">Oct 22</p>
+</div>
+<div class="group px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer mb-1 border-l-[3px] border-transparent">
+<p class="text-sm font-medium text-on-surface truncate">Global Paid Search Audit</p>
+<p class="text-[10px] mono text-slate-400 mt-1 uppercase">Oct 19</p>
+</div>
+<div class="group px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer mb-1 border-l-[3px] border-transparent">
+<p class="text-sm font-medium text-on-surface truncate">Holiday Season Reach Forecast</p>
+<p class="text-[10px] mono text-slate-400 mt-1 uppercase">Oct 15</p>
+</div>
+<div class="group px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer mb-1 border-l-[3px] border-transparent">
+<p class="text-sm font-medium text-on-surface truncate">Competitive Media Spend Q1</p>
+<p class="text-[10px] mono text-slate-400 mt-1 uppercase">Oct 12</p>
+</div>
+<div class="group px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer mb-1 border-l-[3px] border-transparent">
+<p class="text-sm font-medium text-on-surface truncate">Retail Media Network Strategy</p>
+<p class="text-[10px] mono text-slate-400 mt-1 uppercase">Oct 08</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CHAT CANVAS -->
+<main class="flex-1 flex flex-col h-screen relative bg-background">
+<!-- TOP APP BAR -->
+<header class="sticky top-0 w-full h-16 bg-white border-b border-zinc-200/50 shadow-sm shadow-black/5 flex justify-between items-center px-8 z-30">
+<div class="flex items-center gap-4">
+<h2 class="text-lg font-semibold text-on-surface">Q2 Digital Strategy Review</h2>
+<span class="px-2 py-0.5 bg-surface-container-low text-[10px] mono text-secondary rounded">SAVED</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="forum">forum</span>
+<span class="text-sm font-medium text-slate-500">14 messages</span>
+</div>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined text-slate-500" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- MESSAGE AREA -->
+<div class="flex-1 overflow-y-auto px-8 py-10 space-y-12 max-w-5xl mx-auto w-full">
+<!-- User Message -->
+<div class="flex flex-col items-end group">
+<div class="flex items-center gap-3 mb-2 px-1">
+<span class="text-[10px] mono text-slate-400 uppercase tracking-widest">Client Lead</span>
+<span class="text-[10px] mono text-slate-400">10:42 AM</span>
+</div>
+<div class="user-bubble bg-primary text-white p-5 max-w-[85%] shadow-sm leading-relaxed">
+                    How are we pacing for the Q2 Voss campaign? I'm concerned about the CPAs we're seeing on social versus search. We need to look at reallocating the remaining budget.
+                </div>
+</div>
+<!-- Assistant Message -->
+<div class="flex flex-col items-start group">
+<div class="flex items-center gap-3 mb-2 px-1">
+<span class="text-[10px] mono text-primary uppercase tracking-widest font-bold">Media Architect</span>
+<span class="text-[10px] mono text-slate-400">10:43 AM</span>
+</div>
+<div class="assistant-bubble bg-white border border-zinc-200/50 p-6 max-w-[90%] shadow-sm space-y-4">
+<p class="text-on-surface leading-relaxed">
+                        Analyzing the current performance data for the Voss Q2 cycle. Here is the architectural breakdown of our efficiency metrics:
+                    </p>
+<div class="grid grid-cols-2 gap-4 py-2">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<span class="text-[10px] mono text-slate-500 uppercase">Paid Search CPA</span>
+<p class="text-xl font-bold text-primary mt-1">$14.22</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<span class="text-[10px] mono text-slate-500 uppercase">Paid Social CPA</span>
+<p class="text-xl font-bold text-primary mt-1">$28.45</p>
+</div>
+</div>
+<p class="text-on-surface leading-relaxed">
+                        The Paid Social CPA is currently 100% higher than Search. This is largely driven by audience saturation in the 'Premium Lifestyle' segment. I recommend shifting 25% of the remaining Social budget into 'High-Intent Retargeting' on Search.
+                    </p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end group">
+<div class="flex items-center gap-3 mb-2 px-1">
+<span class="text-[10px] mono text-slate-400 uppercase tracking-widest">Client Lead</span>
+<span class="text-[10px] mono text-slate-400">10:45 AM</span>
+</div>
+<div class="user-bubble bg-primary text-white p-5 max-w-[85%] shadow-sm leading-relaxed">
+                    That makes sense. Can you project the ROAS if we execute that 25% shift? Also, does this affect our reach frequency cap for the month?
+                </div>
+</div>
+<!-- Assistant Message -->
+<div class="flex flex-col items-start group">
+<div class="flex items-center gap-3 mb-2 px-1">
+<span class="text-[10px] mono text-primary uppercase tracking-widest font-bold">Media Architect</span>
+<span class="text-[10px] mono text-slate-400">10:46 AM</span>
+</div>
+<div class="assistant-bubble bg-white border border-zinc-200/50 p-6 max-w-[90%] shadow-sm space-y-4">
+<p class="text-on-surface leading-relaxed">
+                        Executing a 25% budget reallocation from Social to Search would likely result in:
+                    </p>
+<ul class="space-y-3">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1" data-icon="trending_up">trending_up</span>
+<span>A projected **12.4% increase** in overall blended ROAS.</span>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1" data-icon="data_exploration">data_exploration</span>
+<span>A reduction in Reach Frequency on Social from 4.2x to 3.1x, which actually mitigates ad fatigue in our core audience.</span>
+</li>
+</ul>
+<div class="bg-surface-container-low/50 border border-zinc-200/30 p-4 rounded-lg">
+<span class="text-[10px] mono text-slate-500 uppercase block mb-3">Projected KPI Impact</span>
+<div class="h-32 flex items-end gap-2 px-2">
+<div class="flex-1 bg-primary/20 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[75%]"></div>
+<div class="flex-1 bg-primary rounded-t h-[95%]"></div>
+<div class="flex-1 bg-primary/30 rounded-t h-[50%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer for bottom input -->
+<div class="h-32"></div>
+</div>
+<!-- INPUT BAR -->
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-background via-background to-transparent pointer-events-none">
+<div class="max-w-4xl mx-auto flex gap-4 pointer-events-auto">
+<div class="flex-1 relative">
+<input class="w-full h-14 bg-surface-container-lowest border border-zinc-200/50 rounded-[12px] pl-6 pr-12 text-sm focus:outline-none focus:border-primary transition-all shadow-sm" placeholder="Type a message or paste a media plan..." type="text"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors" data-icon="attach_file">attach_file</span>
+</div>
+</div>
+<button class="h-14 w-14 bg-primary text-white rounded-[12px] flex items-center justify-center shadow-sm hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>
