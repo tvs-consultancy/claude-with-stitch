@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediaPlan Pro - Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@300,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#174468",
+                        "primary-container": "#335C81",
+                        "canvas-fog": "#FAFAFA",
+                        "shell-black": "#0F1117",
+                        "shell-surface": "#1A1D27",
+                        "corsair": "#174468",
+                        "corsair-wash": "#EBF0F7",
+                        "zinc-border": "#E4E4E7",
+                        "active-surface": "#ECFDF5",
+                        "active-text": "#059669",
+                        "draft-surface": "#FFFBEB",
+                        "draft-text": "#B45309",
+                        "completed-surface": "#EBF0F7",
+                        "completed-text": "#335C81",
+                        "paused-surface": "#F4F4F5",
+                        "paused-text": "#52525B",
+                    },
+                    borderRadius: {
+                        "xl": "1rem",
+                    },
+                    fontFamily: {
+                        sans: ['Geist', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .metric-lock { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="bg-canvas-fog text-slate-900 antialiased min-h-screen flex">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-[#0F1117] flex flex-col py-6 px-4 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-[18px] font-medium text-white tracking-tight">MediaPlan Pro</h1>
+<p class="text-[12px] text-zinc-500 font-normal">AI-Powered Planning</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Dashboard Active -->
+<a class="flex items-center px-4 py-3 bg-[#1A1D27] text-white border-l-[3px] border-[#335C81] font-medium transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-white" data-icon="dashboard">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 text-zinc-500 hover:text-white hover:bg-[#1A1D27] transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-zinc-500 group-hover:text-white" data-icon="chat">chat</span>
+<span class="text-sm">Chat</span>
+</a>
+<a class="flex items-center px-4 py-3 text-zinc-500 hover:text-white hover:bg-[#1A1D27] transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-zinc-500 group-hover:text-white" data-icon="folder">folder</span>
+<span class="text-sm">Files</span>
+</a>
+<a class="flex items-center px-4 py-3 text-zinc-500 hover:text-white hover:bg-[#1A1D27] transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-zinc-500 group-hover:text-white" data-icon="event_note">event_note</span>
+<span class="text-sm">Plans</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 space-y-1 border-t border-zinc-800/50">
+<button class="w-full flex items-center justify-center gap-2 bg-[#335C81] text-white py-2.5 rounded-lg text-sm font-medium mb-6 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Plan
+            </button>
+<a class="flex items-center px-4 py-2 text-zinc-500 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined mr-3 text-sm" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center px-4 py-2 text-zinc-500 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined mr-3 text-sm" data-icon="help">help</span>
+<span class="text-sm">Support</span>
+</a>
+<!-- Profile Footer -->
+<div class="mt-6 flex items-center px-4 gap-3">
+<div class="relative h-9 w-9 rounded-full bg-zinc-800 overflow-hidden">
+<img alt="Sarah Chen Profile Picture" class="h-full w-full object-cover" data-alt="professional headshot of a woman with short dark hair and a confident smile in a minimal office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyyjKCEh0SfKfc9VC4ULX5uz9esj03uQOeV2fU4blqXxP8_YFYVaphw1PosjzNYteqYXcIYcMtpbGw7QhOiwEXVVfXrO9c1jvIo1lbqqB_DL9TYa7IJIoBKchs54p_jrbmGTIhrmBqsbntSZwFJwTarISCrVlkA5pWC_HLUSYx5G4b35f1rstH83YZuv4ZHzPBftHdeSFmB9M68C6Fgcw-Da2LjO3KnoVoaoxYUxSP25pN03n01vtLjN4zWS-3QfaEzpsJ1BOHu8X2"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white">Sarah Chen</span>
+<span class="text-[10px] text-zinc-500 uppercase tracking-wider">Lead Planner</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] flex-1 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-8 py-6 sticky top-0 bg-canvas-fog/80 backdrop-blur-md z-40">
+<div>
+<h2 class="text-2xl font-semibold text-slate-900">Dashboard</h2>
+<p class="text-[0.875rem] text-slate-500 font-normal">AI-Powered planning overview and performance metrics.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-white border border-zinc-200/50 rounded-lg px-3 py-1.5 shadow-sm">
+<span class="material-symbols-outlined text-zinc-400 text-lg" data-icon="search">search</span>
+<input class="border-none focus:ring-0 text-sm p-0 w-48 bg-transparent" placeholder="Search data..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:text-corsair transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<div class="relative p-2 text-slate-500 hover:text-corsair transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-canvas-fog"></span>
+</div>
+<div class="h-8 w-px bg-zinc-200/50 mx-2"></div>
+<button class="px-4 py-2 bg-white border border-zinc-200/50 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors">Share</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:brightness-110 transition-colors shadow-sm">Export Data</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="px-8 pb-12 space-y-8">
+<!-- Summary Stats CSS Grid (4 columns) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-white p-6 rounded-xl border border-zinc-200/50 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">Active Campaigns</span>
+<div class="h-2 w-2 rounded-full bg-corsair"></div>
+</div>
+<div class="metric-lock text-3xl font-semibold text-slate-900">4</div>
+<div class="flex items-center text-[11px] text-active-text metric-lock">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="trending_up">trending_up</span>
+                        +1 from last month
+                    </div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-6 rounded-xl border border-zinc-200/50 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Budget</span>
+<div class="h-2 w-2 rounded-full bg-active-text"></div>
+</div>
+<div class="metric-lock text-3xl font-semibold text-slate-900">$2,385,000</div>
+<div class="text-[11px] text-slate-400 font-normal">Allocated for Q3-Q4</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-6 rounded-xl border border-zinc-200/50 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">Active Spend</span>
+<div class="h-2 w-2 rounded-full bg-draft-text"></div>
+</div>
+<div class="metric-lock text-3xl font-semibold text-slate-900">$1,075,000</div>
+<div class="text-[11px] text-slate-400 font-normal">Current monthly burn</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-6 rounded-xl border border-zinc-200/50 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">Draft Plans</span>
+<div class="h-2 w-2 rounded-full bg-zinc-400"></div>
+</div>
+<div class="metric-lock text-3xl font-semibold text-slate-900">4</div>
+<div class="text-[11px] text-slate-400 font-normal">Awaiting approval</div>
+</div>
+</section>
+<!-- Quick Actions CSS Grid (3 columns) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<button class="bg-corsair-wash p-8 rounded-xl flex items-center gap-6 group hover:bg-corsair-wash/80 transition-all text-left">
+<div class="h-14 w-14 bg-white rounded-full flex items-center justify-center text-corsair shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="chat">chat</span>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-corsair">Start Planning Chat</h3>
+<p class="text-sm text-corsair/70">Let AI suggest your next channel mix</p>
+</div>
+</button>
+<button class="bg-active-surface p-8 rounded-xl flex items-center gap-6 group hover:bg-active-surface/80 transition-all text-left min-h-[140px]">
+<div class="h-14 w-14 bg-white rounded-full flex items-center justify-center text-active-text shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="upload_file">upload_file</span>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-active-text">Upload Media Files</h3>
+<p class="text-sm text-active-text/70">Import existing schedules or assets</p>
+</div>
+</button>
+<button class="bg-[#F4F4F5] p-8 rounded-xl flex items-center gap-6 group hover:bg-[#E4E4E7] transition-all text-left">
+<div class="h-14 w-14 bg-white rounded-full flex items-center justify-center text-slate-600 shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="description">description</span>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-slate-700">View All Plans</h3>
+<p class="text-sm text-slate-500">Browse historical and draft archives</p>
+</div>
+</button>
+</section>
+<!-- Recent Media Plans Table Card -->
+<section class="bg-white rounded-xl border border-zinc-200/50 shadow-sm overflow-hidden">
+<div class="px-8 py-6 flex items-center justify-between">
+<h3 class="text-lg font-semibold text-slate-900">Recent Media Plans</h3>
+<a class="text-sm font-medium text-corsair hover:underline" href="#">View all</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/80">
+<th class="px-8 py-4 text-[11px] font-semibold text-slate-500 uppercase tracking-widest">Plan Name</th>
+<th class="px-6 py-4 text-[11px] font-semibold text-slate-500 uppercase tracking-widest">Client</th>
+<th class="px-6 py-4 text-[11px] font-semibold text-slate-500 uppercase tracking-widest">Budget</th>
+<th class="px-6 py-4 text-[11px] font-semibold text-slate-500 uppercase tracking-widest">Status</th>
+<th class="px-6 py-4 text-[11px] font-semibold text-slate-500 uppercase tracking-widest">Channels</th>
+<th class="px-8 py-4 text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-100/50">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-8 py-5">
+<div class="font-medium text-slate-900">Meridian Q2 Digital Push</div>
+<div class="metric-lock text-[10px] text-slate-400 mt-0.5">2024-04-01 - 2024-06-30</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">Meridian Tech</td>
+<td class="px-6 py-5 metric-lock text-sm font-medium text-slate-900">$450,000</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-active-surface text-active-text uppercase tracking-tight">Active</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-slate-500">Social</span>
+<span class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-slate-500">Search</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-400 hover:text-corsair transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-slate-50/30 hover:bg-slate-50/50 transition-colors">
+<td class="px-8 py-5">
+<div class="font-medium text-slate-900">Voss Automotive Launch</div>
+<div class="metric-lock text-[10px] text-slate-400 mt-0.5">2024-05-15 - 2024-12-31</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">Voss Group</td>
+<td class="px-6 py-5 metric-lock text-sm font-medium text-slate-900">$1,200,000</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-completed-surface text-completed-text uppercase tracking-tight">Planning</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-slate-500">OOH</span>
+<span class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-slate-500">TV</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-400 hover:text-corsair transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-8 py-5">
+<div class="font-medium text-slate-900">Hale and Partners Brand Refresh</div>
+<div class="metric-lock text-[10px] text-slate-400 mt-0.5">2024-08-01 - 2024-09-30</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">Hale &amp; Partners</td>
+<td class="px-6 py-5 metric-lock text-sm font-medium text-slate-900">$185,000</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-draft-surface text-draft-text uppercase tracking-tight">Draft</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-slate-500">Display</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-400 hover:text-corsair transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-slate-50/30 hover:bg-slate-50/50 transition-colors">
+<td class="px-8 py-5">
+<div class="font-medium text-slate-900">Global Omni-Channel Q4</div>
+<div class="metric-lock text-[10px] text-slate-400 mt-0.5">2024-10-01 - 2024-12-31</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">Lumina Retail</td>
+<td class="px-6 py-5 metric-lock text-sm font-medium text-slate-900">$2,800,000</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-paused-surface text-paused-text uppercase tracking-tight">Paused</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-slate-500">Global</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-400 hover:text-corsair transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-8 py-5">
+<div class="font-medium text-slate-900">Retail Sync Phase 1</div>
+<div class="metric-lock text-[10px] text-slate-400 mt-0.5">2024-03-01 - 2024-04-15</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">Swift Mart</td>
+<td class="px-6 py-5 metric-lock text-sm font-medium text-slate-900">$320,000</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-active-surface text-active-text uppercase tracking-tight">Active</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-slate-500">Radio</span>
+<span class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-medium text-slate-500">Local</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-400 hover:text-corsair transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- FAB Suppression Rule Active: Not rendered on Dashboard Details per guidelines -->
+</body></html>

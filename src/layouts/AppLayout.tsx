@@ -5,92 +5,79 @@ const navItems = [
   { to: '/', label: 'Dashboard', icon: 'dashboard' },
   { to: '/chat', label: 'Chat', icon: 'chat' },
   { to: '/files', label: 'Files', icon: 'folder' },
-  { to: '/plans', label: 'Media Plans', icon: 'event_note' },
+  { to: '/plans', label: 'Plans', icon: 'event_note' },
 ];
 
 export default function AppLayout() {
   return (
-    <div className="flex h-screen bg-surface">
-      {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 text-white flex flex-col shrink-0 fixed left-0 top-0 h-screen z-50">
-        <div className="px-6 py-6 mb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
-              <Icon name="analytics" filled className="text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-white tracking-wide">MediaPlan Pro</h1>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">
-                AI-Powered Planning
-              </p>
-            </div>
-          </div>
+    <div className="flex h-screen bg-canvas-fog">
+      {/* Sidebar Shell */}
+      <aside className="fixed left-0 top-0 h-full w-[260px] bg-shell-black flex flex-col py-6 px-4 z-50">
+        <div className="mb-10 px-4">
+          <h1 className="text-lg font-medium text-white tracking-tight">MediaPlan Pro</h1>
+          <p className="text-xs text-zinc-500 font-normal">AI-Powered Planning</p>
         </div>
 
-        <nav className="flex-1 space-y-1 px-2">
+        <nav className="flex-1 space-y-1">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === '/'}
               className={({ isActive }) =>
-                `flex items-center gap-3 mx-2 px-4 py-2 rounded-md text-sm font-semibold transition-all ${
+                `flex items-center px-4 py-3 transition-all duration-200 ${
                   isActive
-                    ? 'bg-blue-600 text-white'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                    ? 'bg-shell-surface text-white border-l-[3px] border-primary-container font-medium'
+                    : 'text-zinc-500 hover:text-white hover:bg-shell-surface group'
                 }`
               }
             >
-              <Icon name={item.icon} />
-              <span className="tracking-tight">{item.label}</span>
+              {({ isActive }) => (
+                <>
+                  <Icon
+                    name={item.icon}
+                    className={`mr-3 ${isActive ? 'text-white' : 'text-zinc-500 group-hover:text-white'}`}
+                  />
+                  <span className="text-sm">{item.label}</span>
+                </>
+              )}
             </NavLink>
           ))}
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-slate-800 px-2 space-y-1 pb-6">
+        <div className="mt-auto pt-6 space-y-1 border-t border-zinc-800/50">
           <NavLink
-            to="/profile"
-            className="flex items-center gap-3 mx-2 px-4 py-2 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+            to="/plans"
+            className="w-full flex items-center justify-center gap-2 bg-primary-container text-white py-2.5 rounded-lg text-sm font-medium mb-6 hover:brightness-110 transition-all"
           >
-            <Icon name="account_circle" />
-            <span className="tracking-tight">Profile</span>
+            <Icon name="add" size="sm" />
+            New Plan
           </NavLink>
-          <NavLink
-            to="/settings"
-            className="flex items-center gap-3 mx-2 px-4 py-2 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
-          >
-            <Icon name="settings" />
-            <span className="tracking-tight">Settings</span>
-          </NavLink>
+
+          <a className="flex items-center px-4 py-2 text-zinc-500 hover:text-white transition-colors" href="#">
+            <Icon name="settings" size="sm" className="mr-3" />
+            <span className="text-sm">Settings</span>
+          </a>
+          <a className="flex items-center px-4 py-2 text-zinc-500 hover:text-white transition-colors" href="#">
+            <Icon name="help" size="sm" className="mr-3" />
+            <span className="text-sm">Support</span>
+          </a>
+
+          {/* Profile Footer */}
+          <div className="mt-6 flex items-center px-4 gap-3">
+            <div className="h-9 w-9 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+              <span className="text-xs font-bold text-white">SC</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-medium text-white">Sarah Chen</span>
+              <span className="text-[10px] text-zinc-500 uppercase tracking-wider">Lead Planner</span>
+            </div>
+          </div>
         </div>
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 ml-64 flex flex-col min-h-screen">
-        {/* Glassmorphism header */}
-        <header className="sticky top-0 z-40 glass-header bg-slate-50/80 flex items-center justify-between px-8 py-3 shadow-sm">
-          <div className="relative w-full max-w-md">
-            <Icon name="search" className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" />
-            <input
-              className="w-full bg-surface-container-high border-none rounded-full py-1.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant/60"
-              placeholder="Search plans, assets, or budgets..."
-              type="text"
-            />
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="p-2 text-slate-600 hover:text-primary-container transition-colors">
-              <Icon name="notifications" />
-            </button>
-            <button className="p-2 text-slate-600 hover:text-primary-container transition-colors">
-              <Icon name="help_outline" />
-            </button>
-            <div className="h-8 w-8 rounded-full bg-secondary-container flex items-center justify-center border border-outline-variant/10">
-              <span className="text-xs font-bold text-on-surface">JD</span>
-            </div>
-          </div>
-        </header>
-
-        {/* Page content */}
+      <main className="ml-[260px] flex-1 min-h-screen flex flex-col">
         <div className="flex-1 overflow-auto">
           <Outlet />
         </div>
