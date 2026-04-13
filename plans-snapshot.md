@@ -1,0 +1,59 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - heading "MediaPlan Pro" [level=1] [ref=e6]
+      - paragraph [ref=e7]: AI-Powered Planning
+    - navigation [ref=e8]:
+      - link "dashboard Dashboard" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e10]: dashboard
+        - generic [ref=e11]: Dashboard
+      - link "chat Chat" [ref=e12] [cursor=pointer]:
+        - /url: /chat
+        - generic [ref=e13]: chat
+        - generic [ref=e14]: Chat
+      - link "folder Files" [ref=e15] [cursor=pointer]:
+        - /url: /files
+        - generic [ref=e16]: folder
+        - generic [ref=e17]: Files
+      - link "event_note Plans" [ref=e18] [cursor=pointer]:
+        - /url: /plans
+        - generic [ref=e19]: event_note
+        - generic [ref=e20]: Plans
+    - generic [ref=e21]:
+      - link "add New Plan" [ref=e22] [cursor=pointer]:
+        - /url: /plans
+        - generic [ref=e23]: add
+        - text: New Plan
+      - link "settings Settings" [ref=e24] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e25]: settings
+        - generic [ref=e26]: Settings
+      - link "help Support" [ref=e27] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e28]: help
+        - generic [ref=e29]: Support
+      - generic [ref=e30]:
+        - generic [ref=e32]: SC
+        - generic [ref=e33]:
+          - generic [ref=e34]: Sarah Chen
+          - generic [ref=e35]: Lead Planner
+  - main [ref=e36]:
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: Workspace /
+          - generic [ref=e42]: Media Plans
+        - generic [ref=e43]:
+          - generic [ref=e44]
+          - button "Create Plan" [ref=e47]
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]
+          - generic [ref=e53]
+        - generic [ref=e58]:
+          - generic [ref=e59]
+          - generic [ref=e65]: 10 plans
+        - table [ref=e67]:
+          - rowgroup [ref=e68]
+          - rowgroup [ref=e82]

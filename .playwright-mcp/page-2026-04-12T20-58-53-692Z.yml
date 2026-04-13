@@ -1,0 +1,227 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e8]: analytics
+      - generic [ref=e9]:
+        - heading "MediaPlan Pro" [level=1] [ref=e10]
+        - paragraph [ref=e11]: AI-Powered Planning
+    - navigation [ref=e12]:
+      - link "dashboard Dashboard" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e14]: dashboard
+        - generic [ref=e15]: Dashboard
+      - link "chat Chat" [ref=e16] [cursor=pointer]:
+        - /url: /chat
+        - generic [ref=e17]: chat
+        - generic [ref=e18]: Chat
+      - link "folder Files" [ref=e19] [cursor=pointer]:
+        - /url: /files
+        - generic [ref=e20]: folder
+        - generic [ref=e21]: Files
+      - link "event_note Media Plans" [ref=e22] [cursor=pointer]:
+        - /url: /plans
+        - generic [ref=e23]: event_note
+        - generic [ref=e24]: Media Plans
+    - generic [ref=e25]:
+      - link "account_circle Profile" [ref=e26] [cursor=pointer]:
+        - /url: /profile
+        - generic [ref=e27]: account_circle
+        - generic [ref=e28]: Profile
+      - link "settings Settings" [ref=e29] [cursor=pointer]:
+        - /url: /settings
+        - generic [ref=e30]: settings
+        - generic [ref=e31]: Settings
+  - main [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]: search
+        - textbox "Search plans, assets, or budgets..." [ref=e36]
+      - generic [ref=e37]:
+        - button "notifications" [ref=e38]:
+          - generic [ref=e39]: notifications
+        - button "help_outline" [ref=e40]:
+          - generic [ref=e41]: help_outline
+        - generic [ref=e43]: JD
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - heading "Media Plans" [level=2] [ref=e48]
+          - paragraph [ref=e49]: Manage and track your media buying strategies
+        - generic [ref=e50]:
+          - button "table_rows Table" [ref=e51]:
+            - generic [ref=e52]: table_rows
+            - text: Table
+          - button "grid_view Grid" [active] [ref=e53]:
+            - generic [ref=e54]: grid_view
+            - text: Grid
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - generic [ref=e57]: search
+          - textbox "Search plans or clients..." [ref=e58]
+        - combobox [ref=e59]:
+          - option "All Statuses" [selected]
+          - option "Active"
+          - option "Draft"
+          - option "Completed"
+          - option "Paused"
+        - generic [ref=e60]: 10 plans total
+      - generic [ref=e252]:
+        - generic [ref=e253]:
+          - generic [ref=e254]:
+            - heading "Annual Brand Refresh" [level=3] [ref=e255]
+            - generic [ref=e256]: completed
+          - paragraph [ref=e257]: GreenLeaf Foods
+          - generic [ref=e258]:
+            - generic [ref=e259]:
+              - generic [ref=e260]: Budget
+              - generic [ref=e261]: $200,000
+            - generic [ref=e262]:
+              - generic [ref=e263]: Duration
+              - generic [ref=e264]: 2026-01-01 — 2026-03-31
+          - generic [ref=e265]:
+            - generic [ref=e266]: TV
+            - generic [ref=e267]: Print
+            - generic [ref=e268]: Digital
+        - generic [ref=e269]:
+          - generic [ref=e270]:
+            - heading "App Install Campaign" [level=3] [ref=e271]
+            - generic [ref=e272]: paused
+          - paragraph [ref=e273]: FinanceApp
+          - generic [ref=e274]:
+            - generic [ref=e275]:
+              - generic [ref=e276]: Budget
+              - generic [ref=e277]: $95,000
+            - generic [ref=e278]:
+              - generic [ref=e279]: Duration
+              - generic [ref=e280]: 2026-02-01 — 2026-04-30
+          - generic [ref=e281]:
+            - generic [ref=e282]: Mobile
+            - generic [ref=e283]: Social Media
+        - generic [ref=e284]:
+          - generic [ref=e285]:
+            - heading "Back to School 2026" [level=3] [ref=e286]
+            - generic [ref=e287]: draft
+          - paragraph [ref=e288]: EduTech Solutions
+          - generic [ref=e289]:
+            - generic [ref=e290]:
+              - generic [ref=e291]: Budget
+              - generic [ref=e292]: $120,000
+            - generic [ref=e293]:
+              - generic [ref=e294]: Duration
+              - generic [ref=e295]: 2026-07-15 — 2026-09-15
+          - generic [ref=e296]:
+            - generic [ref=e297]: Digital
+            - generic [ref=e298]: Social Media
+            - generic [ref=e299]: Email
+        - generic [ref=e300]:
+          - generic [ref=e301]:
+            - heading "Holiday Season Promo" [level=3] [ref=e302]
+            - generic [ref=e303]: draft
+          - paragraph [ref=e304]: RetailMax
+          - generic [ref=e305]:
+            - generic [ref=e306]:
+              - generic [ref=e307]: Budget
+              - generic [ref=e308]: $500,000
+            - generic [ref=e309]:
+              - generic [ref=e310]: Duration
+              - generic [ref=e311]: 2026-11-01 — 2026-12-31
+          - generic [ref=e312]:
+            - generic [ref=e313]: TV
+            - generic [ref=e314]: Radio
+            - generic [ref=e315]: Social Media
+            - generic [ref=e316]: Display
+        - generic [ref=e317]:
+          - generic [ref=e318]:
+            - heading "Influencer Partnership Q3" [level=3] [ref=e319]
+            - generic [ref=e320]: draft
+          - paragraph [ref=e321]: BeautyBrand Co
+          - generic [ref=e322]:
+            - generic [ref=e323]:
+              - generic [ref=e324]: Budget
+              - generic [ref=e325]: $180,000
+            - generic [ref=e326]:
+              - generic [ref=e327]: Duration
+              - generic [ref=e328]: 2026-07-01 — 2026-09-30
+          - generic [ref=e329]:
+            - generic [ref=e330]: Influencer
+            - generic [ref=e331]: Social Media
+            - generic [ref=e332]: Video
+        - generic [ref=e333]:
+          - generic [ref=e334]:
+            - heading "New Market Entry - APAC" [level=3] [ref=e335]
+            - generic [ref=e336]: active
+          - paragraph [ref=e337]: GlobalTech
+          - generic [ref=e338]:
+            - generic [ref=e339]:
+              - generic [ref=e340]: Budget
+              - generic [ref=e341]: $750,000
+            - generic [ref=e342]:
+              - generic [ref=e343]: Duration
+              - generic [ref=e344]: 2026-05-01 — 2026-10-31
+          - generic [ref=e345]:
+            - generic [ref=e346]: Digital
+            - generic [ref=e347]: Social Media
+            - generic [ref=e348]: Display
+            - generic [ref=e349]: Video
+        - generic [ref=e350]:
+          - generic [ref=e351]:
+            - heading "Podcast Sponsorship Series" [level=3] [ref=e352]
+            - generic [ref=e353]: active
+          - paragraph [ref=e354]: CloudSync
+          - generic [ref=e355]:
+            - generic [ref=e356]:
+              - generic [ref=e357]: Budget
+              - generic [ref=e358]: $60,000
+            - generic [ref=e359]:
+              - generic [ref=e360]: Duration
+              - generic [ref=e361]: 2026-04-01 — 2026-09-30
+          - generic [ref=e362]:
+            - generic [ref=e363]: Audio
+            - generic [ref=e364]: Social Media
+        - generic [ref=e365]:
+          - generic [ref=e366]:
+            - heading "Q2 Brand Awareness Campaign" [level=3] [ref=e367]
+            - generic [ref=e368]: active
+          - paragraph [ref=e369]: Acme Corp
+          - generic [ref=e370]:
+            - generic [ref=e371]:
+              - generic [ref=e372]: Budget
+              - generic [ref=e373]: $150,000
+            - generic [ref=e374]:
+              - generic [ref=e375]: Duration
+              - generic [ref=e376]: 2026-04-01 — 2026-06-30
+          - generic [ref=e377]:
+            - generic [ref=e378]: Social Media
+            - generic [ref=e379]: Display
+            - generic [ref=e380]: Video
+        - generic [ref=e381]:
+          - generic [ref=e382]:
+            - heading "Spring Fitness Drive" [level=3] [ref=e383]
+            - generic [ref=e384]: active
+          - paragraph [ref=e385]: FitLife Gyms
+          - generic [ref=e386]:
+            - generic [ref=e387]:
+              - generic [ref=e388]: Budget
+              - generic [ref=e389]: $80,000
+            - generic [ref=e390]:
+              - generic [ref=e391]: Duration
+              - generic [ref=e392]: 2026-03-01 — 2026-05-31
+          - generic [ref=e393]:
+            - generic [ref=e394]: Social Media
+            - generic [ref=e395]: Influencer
+        - generic [ref=e396]:
+          - generic [ref=e397]:
+            - heading "Summer Product Launch" [level=3] [ref=e398]
+            - generic [ref=e399]: draft
+          - paragraph [ref=e400]: TechStart Inc
+          - generic [ref=e401]:
+            - generic [ref=e402]:
+              - generic [ref=e403]: Budget
+              - generic [ref=e404]: $250,000
+            - generic [ref=e405]:
+              - generic [ref=e406]: Duration
+              - generic [ref=e407]: 2026-06-01 — 2026-08-31
+          - generic [ref=e408]:
+            - generic [ref=e409]: TV
+            - generic [ref=e410]: Digital
+            - generic [ref=e411]: Print

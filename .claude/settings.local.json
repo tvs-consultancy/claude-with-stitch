@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__stitch__create_project",
+      "Skill(stitch-design)",
+      "mcp__stitch__generate_screen_from_text",
+      "mcp__stitch__list_screens",
+      "mcp__stitch__list_projects",
+      "mcp__stitch__get_screen",
+      "Bash(curl -sL \"https://lh3.googleusercontent.com/aida/ADBb0ugk0NSKM_2_l6u3IJcBx33iK7y4DdjHhhsUm5gSnF8i0RY_9EQmHDByx-xy7NufXJV5aWlofZdaoc9V2PxK8vhKcsccBYMeBvhaH5UvEPjfrMIY5otxSt3DKFTNt-xiNHMmjjxiri8IasJcqnil95BJZiBmYNBhe13dCKNSR8Scy0fxGb0Y0ykrjgMaRNcsfMRQLS5r8mlvXEwL7OvvAHRI2WZC3l_1ZCOZZ7qwxUvg43egf4PPd3K9uf2j\" -o .stitch/designs/chat-v1.png)",
+      "Skill(react-components)",
+      "Skill(taste-design)",
+      "Skill(enhance-prompt)",
+      "mcp__stitch__list_design_systems",
+      "Skill(design-md)",
+      "WebFetch(domain:contribution.usercontent.google.com)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_click"
+    ]
+  }
+}

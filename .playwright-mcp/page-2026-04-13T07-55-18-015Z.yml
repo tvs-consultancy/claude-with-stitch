@@ -1,0 +1,188 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - heading "MediaPlan Pro" [level=1] [ref=e6]
+      - paragraph [ref=e7]: AI-Powered Planning
+    - navigation [ref=e8]:
+      - link "dashboard Dashboard" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e10]: dashboard
+        - generic [ref=e11]: Dashboard
+      - link "chat Chat" [ref=e12] [cursor=pointer]:
+        - /url: /chat
+        - generic [ref=e13]: chat
+        - generic [ref=e14]: Chat
+      - link "folder Files" [ref=e15] [cursor=pointer]:
+        - /url: /files
+        - generic [ref=e16]: folder
+        - generic [ref=e17]: Files
+      - link "event_note Plans" [ref=e18] [cursor=pointer]:
+        - /url: /plans
+        - generic [ref=e19]: event_note
+        - generic [ref=e20]: Plans
+    - generic [ref=e21]:
+      - link "add New Plan" [ref=e22] [cursor=pointer]:
+        - /url: /plans
+        - generic [ref=e23]: add
+        - text: New Plan
+      - link "settings Settings" [ref=e24] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e25]: settings
+        - generic [ref=e26]: Settings
+      - link "help Support" [ref=e27] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e28]: help
+        - generic [ref=e29]: Support
+      - generic [ref=e30]:
+        - generic [ref=e32]: SC
+        - generic [ref=e33]:
+          - generic [ref=e34]: Sarah Chen
+          - generic [ref=e35]: Lead Planner
+  - main [ref=e36]:
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: Workspace /
+          - generic [ref=e42]: Media Plans
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - generic [ref=e45]: search
+            - textbox "Quick search..." [ref=e46]
+          - button "Create Plan" [ref=e47]
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - heading "Media Plans" [level=2] [ref=e51]
+            - paragraph [ref=e52]: 10 Active Plans in Workspace
+          - generic [ref=e53]:
+            - button "view_list Table" [ref=e54]:
+              - generic [ref=e55]: view_list
+              - text: Table
+            - button "grid_view Cards" [ref=e56]:
+              - generic [ref=e57]: grid_view
+              - text: Cards
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - generic [ref=e61]: search
+              - textbox "Filter plans by name or client..." [ref=e62]
+            - generic [ref=e63]:
+              - combobox [ref=e64]:
+                - 'option "Status: All" [selected]'
+                - option "Active"
+                - option "Draft"
+                - option "Completed"
+                - option "Paused"
+              - generic: expand_more
+          - generic [ref=e65]: 10 plans
+        - table [ref=e67]:
+          - rowgroup [ref=e68]:
+            - row "PLAN NAME unfold_more CLIENT unfold_more DATE RANGE BUDGET unfold_more STATUS CHANNELS" [ref=e69]:
+              - columnheader "PLAN NAME unfold_more" [ref=e70]:
+                - button "PLAN NAME unfold_more" [ref=e71]:
+                  - text: PLAN NAME
+                  - generic [ref=e72]: unfold_more
+              - columnheader "CLIENT unfold_more" [ref=e73]:
+                - button "CLIENT unfold_more" [ref=e74]:
+                  - text: CLIENT
+                  - generic [ref=e75]: unfold_more
+              - columnheader "DATE RANGE" [ref=e76]
+              - columnheader "BUDGET unfold_more" [ref=e77]:
+                - button "BUDGET unfold_more" [ref=e78]:
+                  - text: BUDGET
+                  - generic [ref=e79]: unfold_more
+              - columnheader "STATUS" [ref=e80]
+              - columnheader "CHANNELS" [ref=e81]
+          - rowgroup [ref=e82]:
+            - row "Meridian Q2 Digital Push Meridian Media Group Mar 1 - Jun 30, 2025 $847,500 active Social Search" [ref=e83]:
+              - cell "Meridian Q2 Digital Push" [ref=e84]
+              - cell "Meridian Media Group" [ref=e85]
+              - cell "Mar 1 - Jun 30, 2025" [ref=e86]
+              - cell "$847,500" [ref=e87]
+              - cell "active" [ref=e88]
+              - cell "Social Search" [ref=e89]:
+                - generic [ref=e90]:
+                  - generic [ref=e91]: Social
+                  - generic [ref=e92]: Search
+            - row "Voss Automotive Launch Voss Motors Apr 15 - Dec 31, 2025 $1,245,000 active OOH TV" [ref=e93]:
+              - cell "Voss Automotive Launch" [ref=e94]
+              - cell "Voss Motors" [ref=e95]
+              - cell "Apr 15 - Dec 31, 2025" [ref=e96]
+              - cell "$1,245,000" [ref=e97]
+              - cell "active" [ref=e98]
+              - cell "OOH TV" [ref=e99]:
+                - generic [ref=e100]:
+                  - generic [ref=e101]: OOH
+                  - generic [ref=e102]: TV
+            - row "Hale Brand Refresh Hale & Partners Aug 1 - Sep 30, 2025 $425,000 draft Display" [ref=e103]:
+              - cell "Hale Brand Refresh" [ref=e104]
+              - cell "Hale & Partners" [ref=e105]
+              - cell "Aug 1 - Sep 30, 2025" [ref=e106]
+              - cell "$425,000" [ref=e107]
+              - cell "draft" [ref=e108]
+              - cell "Display" [ref=e109]:
+                - generic [ref=e111]: Display
+            - row "Apex Summer Campaign Apex Athletics Jun 1 - Aug 31, 2025 $678,300 completed Meta OOH" [ref=e112]:
+              - cell "Apex Summer Campaign" [ref=e113]
+              - cell "Apex Athletics" [ref=e114]
+              - cell "Jun 1 - Aug 31, 2025" [ref=e115]
+              - cell "$678,300" [ref=e116]
+              - cell "completed" [ref=e117]
+              - cell "Meta OOH" [ref=e118]:
+                - generic [ref=e119]:
+                  - generic [ref=e120]: Meta
+                  - generic [ref=e121]: OOH
+            - row "Caliber Financial Q3 Caliber Wealth Advisors Jul 1 - Sep 30, 2025 $892,000 active LinkedIn" [ref=e122]:
+              - cell "Caliber Financial Q3" [ref=e123]
+              - cell "Caliber Wealth Advisors" [ref=e124]
+              - cell "Jul 1 - Sep 30, 2025" [ref=e125]
+              - cell "$892,000" [ref=e126]
+              - cell "active" [ref=e127]
+              - cell "LinkedIn" [ref=e128]:
+                - generic [ref=e130]: LinkedIn
+            - row "Fern & Bower Holiday Fern & Bower Retail Oct 1 - Dec 24, 2025 $1,125,000 draft TV Digital" [ref=e131]:
+              - cell "Fern & Bower Holiday" [ref=e132]
+              - cell "Fern & Bower Retail" [ref=e133]
+              - cell "Oct 1 - Dec 24, 2025" [ref=e134]
+              - cell "$1,125,000" [ref=e135]
+              - cell "draft" [ref=e136]
+              - cell "TV Digital" [ref=e137]:
+                - generic [ref=e138]:
+                  - generic [ref=e139]: TV
+                  - generic [ref=e140]: Digital
+            - row "Trident Global Rebrand Trident Communications Jan 1 - Mar 31, 2025 $2,348,000 paused Global" [ref=e141]:
+              - cell "Trident Global Rebrand" [ref=e142]
+              - cell "Trident Communications" [ref=e143]
+              - cell "Jan 1 - Mar 31, 2025" [ref=e144]
+              - cell "$2,348,000" [ref=e145]
+              - cell "paused" [ref=e146]
+              - cell "Global" [ref=e147]:
+                - generic [ref=e149]: Global
+            - row "Lumen Health Awareness Lumen Therapeutics May 1 - Oct 31, 2025 $567,600 active Radio Local" [ref=e150]:
+              - cell "Lumen Health Awareness" [ref=e151]
+              - cell "Lumen Therapeutics" [ref=e152]
+              - cell "May 1 - Oct 31, 2025" [ref=e153]
+              - cell "$567,600" [ref=e154]
+              - cell "active" [ref=e155]
+              - cell "Radio Local" [ref=e156]:
+                - generic [ref=e157]:
+                  - generic [ref=e158]: Radio
+                  - generic [ref=e159]: Local
+            - row "Retail Sync Phase 1 Swift Mart Mar 1 - Apr 15, 2025 $320,000 active Radio Local" [ref=e160]:
+              - cell "Retail Sync Phase 1" [ref=e161]
+              - cell "Swift Mart" [ref=e162]
+              - cell "Mar 1 - Apr 15, 2025" [ref=e163]
+              - cell "$320,000" [ref=e164]
+              - cell "active" [ref=e165]
+              - cell "Radio Local" [ref=e166]:
+                - generic [ref=e167]:
+                  - generic [ref=e168]: Radio
+                  - generic [ref=e169]: Local
+            - row "Global Omni-Channel Q4 Lumina Retail Oct 1 - Dec 31, 2025 $2,800,000 paused Global" [ref=e170]:
+              - cell "Global Omni-Channel Q4" [ref=e171]
+              - cell "Lumina Retail" [ref=e172]
+              - cell "Oct 1 - Dec 31, 2025" [ref=e173]
+              - cell "$2,800,000" [ref=e174]
+              - cell "paused" [ref=e175]
+              - cell "Global" [ref=e176]:
+                - generic [ref=e178]: Global
