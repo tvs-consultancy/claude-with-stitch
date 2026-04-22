@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { mockUploadedFiles, formatFileSize } from '../data/mock-data';
 import type { UploadedFile } from '../data/mock-data';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import Icon from '../components/Icon';
 
 const fileTypeConfig: Readonly<Record<string, { icon: string; bg: string; text: string }>> = {
@@ -15,12 +19,41 @@ function getFileConfig(type: string) {
   return fileTypeConfig[type] ?? { icon: 'text_snippet', bg: 'bg-slate-100', text: 'text-slate-600' };
 }
 
+function categorizeFile(file: File): string {
+  const mime = file.type;
+  if (mime.startsWith('image/')) return 'image';
+  if (mime.startsWith('video/')) return 'video';
+  if (mime === 'application/pdf') return 'pdf';
+  if (mime.includes('spreadsheet') || mime.includes('excel') || /\.(xlsx?|csv)$/i.test(file.name)) return 'spreadsheet';
+  if (mime.includes('zip') || mime.includes('compressed') || /\.(zip|tar|gz|rar)$/i.test(file.name)) return 'archive';
+  return 'document';
+}
+
+function toUploadedFile(file: File): UploadedFile {
+  return {
+    id: `local-${crypto.randomUUID()}`,
+    name: file.name,
+    size: file.size,
+    type: categorizeFile(file),
+    uploadedAt: new Date().toISOString(),
+    progress: 100,
+  };
+}
+
 export default function FileUpload() {
   const [files, setFiles] = useState<readonly UploadedFile[]>(mockUploadedFiles);
   const [isDragging, setIsDragging] = useState(false);
 
   function handleRemove(id: string) {
     setFiles(files.filter((f) => f.id !== id));
+  }
+
+  function handleDrop(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault();
+    setIsDragging(false);
+    const dropped = Array.from(e.dataTransfer.files);
+    if (dropped.length === 0) return;
+    setFiles([...dropped.map(toUploadedFile), ...files]);
   }
 
   return (
@@ -31,15 +64,15 @@ export default function FileUpload() {
         <div className="flex items-center gap-4">
           <div className="relative flex items-center bg-surface-container-low rounded-lg px-3 py-1.5">
             <Icon name="search" className="text-mid-zinc mr-2" size="sm" />
-            <input
-              className="bg-transparent border-none focus:ring-0 text-sm w-64 text-deep-ink placeholder:text-muted-zinc/60"
+            <Input
+              className="bg-transparent border-none focus-visible:ring-0 focus-visible:border-transparent text-sm w-64 h-auto p-0 text-deep-ink placeholder:text-muted-zinc/60"
               placeholder="Search archive..."
               type="text"
             />
           </div>
-          <button className="text-mid-zinc hover:text-corsair transition-colors">
+          <Button variant="ghost" size="icon" className="text-mid-zinc hover:text-corsair">
             <Icon name="notifications" />
-          </button>
+          </Button>
         </div>
       </header>
 
@@ -65,10 +98,7 @@ export default function FileUpload() {
             setIsDragging(true);
           }}
           onDragLeave={() => setIsDragging(false)}
-          onDrop={(e) => {
-            e.preventDefault();
-            setIsDragging(false);
-          }}
+          onDrop={handleDrop}
         >
           <Icon
             name={isDragging ? 'cloud_download' : 'cloud_upload'}
@@ -85,7 +115,7 @@ export default function FileUpload() {
         </div>
 
         {/* Uploaded Files */}
-        <div className="bg-white rounded-2xl border border-zinc-border/30 shadow-sm overflow-hidden">
+        <Card className="bg-white border-zinc-border/30 ring-0 shadow-sm gap-0 rounded-2xl">
           <div className="px-8 py-6 flex justify-between items-center border-b border-surface-container">
             <h3 className="text-lg font-semibold text-deep-ink">
               Uploaded Files{' '}
@@ -93,12 +123,13 @@ export default function FileUpload() {
                 ({files.length})
               </span>
             </h3>
-            <button
+            <Button
+              variant="ghost"
               onClick={() => setFiles([])}
-              className="text-error-text text-sm font-medium hover:bg-error-surface px-3 py-1.5 rounded-lg transition-colors"
+              className="text-error-text hover:bg-error-surface"
             >
               Clear all
-            </button>
+            </Button>
           </div>
           <div className="p-8 space-y-6">
             {files.map((file) => {
@@ -143,23 +174,27 @@ export default function FileUpload() {
                   </div>
                   <div className="flex items-center gap-8">
                     {isUploading ? (
-                      <button
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         onClick={() => handleRemove(file.id)}
-                        className="text-mid-zinc hover:text-error-text transition-colors"
+                        className="text-mid-zinc hover:text-error-text"
                       >
                         <Icon name="cancel" />
-                      </button>
+                      </Button>
                     ) : (
                       <>
-                        <span className="text-[13px] font-medium text-active-text bg-active-surface px-3 py-1 rounded-full">
+                        <Badge className="bg-active-surface text-active-text border-0 rounded-full text-[13px] font-medium px-3 py-1 h-auto">
                           Uploaded
-                        </span>
-                        <button
+                        </Badge>
+                        <Button
+                          variant="ghost"
+                          size="icon"
                           onClick={() => handleRemove(file.id)}
                           className="text-mid-zinc hover:text-deep-ink"
                         >
                           <Icon name="more_vert" />
-                        </button>
+                        </Button>
                       </>
                     )}
                   </div>
@@ -177,7 +212,7 @@ export default function FileUpload() {
               </div>
             )}
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );

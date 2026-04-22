@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { mockConversations, assistantResponses } from '../data/mock-data';
 import type { Conversation, ChatMessage } from '../data/mock-data';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import Icon from '../components/Icon';
 
 const sidebarConversations = [
@@ -61,10 +63,10 @@ export default function Chat() {
       {/* Conversation Sidebar */}
       <aside className="w-[280px] h-full bg-white border-r border-zinc-border/50 flex flex-col shrink-0">
         <div className="p-6">
-          <button className="w-full h-11 corsair-gradient text-white rounded-[10px] flex items-center justify-center gap-2 hover:brightness-110 transition-all">
+          <Button className="w-full h-11 corsair-gradient text-white hover:brightness-110">
             <Icon name="add" size="sm" />
             <span className="text-sm font-semibold">New Conversation</span>
-          </button>
+          </Button>
         </div>
         <div className="flex-1 overflow-y-auto">
           <div className="px-2 py-2">
@@ -104,9 +106,9 @@ export default function Chat() {
             <h2 className="text-lg font-semibold text-deep-ink">
               {activeConversation.title}
             </h2>
-            <span className="px-2 py-0.5 bg-surface-container-low text-[10px] metric-lock text-mid-zinc rounded">
+            <Badge variant="secondary" className="bg-surface-container-low text-mid-zinc border-0 rounded text-[10px] metric-lock h-auto">
               SAVED
-            </span>
+            </Badge>
           </div>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
@@ -115,9 +117,9 @@ export default function Chat() {
                 {activeConversation.messages.length} messages
               </span>
             </div>
-            <button className="p-2 hover:bg-surface-container-low rounded-full transition-colors">
-              <Icon name="more_vert" className="text-mid-zinc" />
-            </button>
+            <Button variant="ghost" size="icon" className="rounded-full text-mid-zinc hover:bg-surface-container-low">
+              <Icon name="more_vert" />
+            </Button>
           </div>
         </header>
 
@@ -178,12 +180,13 @@ export default function Chat() {
                 <Icon name="attach_file" className="text-muted-zinc cursor-pointer hover:text-corsair transition-colors" />
               </div>
             </div>
-            <button
+            <Button
               onClick={handleSend}
-              className="h-14 w-14 corsair-gradient text-white rounded-xl flex items-center justify-center shadow-sm hover:brightness-110 transition-all"
+              className="h-14 w-14 corsair-gradient text-white hover:brightness-110 shadow-sm rounded-xl"
+              size="icon-lg"
             >
               <Icon name="send" />
-            </button>
+            </Button>
           </div>
         </div>
       </main>
