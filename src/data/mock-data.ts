@@ -258,6 +258,13 @@ export const mockUploadedFiles: readonly UploadedFile[] = [
   },
 ];
 
+export const statusColors: Readonly<Record<MediaPlan['status'], { bg: string; text: string }>> = {
+  active: { bg: 'bg-active-surface', text: 'text-active-text' },
+  draft: { bg: 'bg-draft-surface', text: 'text-draft-text' },
+  completed: { bg: 'bg-completed-surface', text: 'text-completed-text' },
+  paused: { bg: 'bg-paused-surface', text: 'text-paused-text' },
+};
+
 export function formatCurrency(amount: number): string {
   if (!Number.isFinite(amount)) return '—';
   return new Intl.NumberFormat('en-US', {

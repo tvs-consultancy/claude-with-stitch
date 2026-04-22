@@ -4,6 +4,7 @@ import type { Conversation, ChatMessage } from '../data/mock-data';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '../components/Icon';
+import EmptyState from '../components/EmptyState';
 
 const sidebarConversations = [
   { id: '1', title: 'Q2 Digital Strategy Review', date: 'Today' },
@@ -129,13 +130,12 @@ export default function Chat() {
         {/* Message Area */}
         <div className="flex-1 overflow-y-auto px-8 py-10 space-y-12 max-w-5xl mx-auto w-full">
           {!activeConversation && (
-            <div className="flex flex-col items-center justify-center py-20 text-center">
-              <Icon name="forum" className="text-muted-zinc text-[48px] mb-4" size="xl" />
-              <p className="text-lg font-medium text-deep-ink">No messages yet</p>
-              <p className="text-sm text-mid-zinc mt-1 max-w-md">
-                This conversation hasn't been started. Pick another from the sidebar, or start a new one.
-              </p>
-            </div>
+            <EmptyState
+              icon="forum"
+              title="No messages yet"
+              description="This conversation hasn't been started. Pick another from the sidebar, or start a new one."
+              padding="lg"
+            />
           )}
           {activeConversation?.messages.map((msg) => (
             <div

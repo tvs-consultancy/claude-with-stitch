@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Icon from '../components/Icon';
+import EmptyState from '../components/EmptyState';
 
 const fileTypeConfig: Readonly<Record<string, { icon: string; bg: string; text: string }>> = {
   spreadsheet: { icon: 'table_chart', bg: 'bg-green-50', text: 'text-green-600' },
@@ -207,13 +208,11 @@ export default function FileUpload() {
             })}
 
             {files.length === 0 && (
-              <div className="flex flex-col items-center justify-center py-16">
-                <Icon name="folder_open" className="text-muted-zinc text-[48px] mb-4" size="xl" />
-                <p className="text-lg font-medium text-deep-ink">No files uploaded yet</p>
-                <p className="text-[15px] text-mid-zinc mt-1">
-                  Upload files to get started with your media plan
-                </p>
-              </div>
+              <EmptyState
+                icon="folder_open"
+                title="No files uploaded yet"
+                description="Upload files to get started with your media plan"
+              />
             )}
           </div>
         </Card>
