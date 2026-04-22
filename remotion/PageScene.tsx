@@ -1,6 +1,7 @@
 import React from "react";
 import {
   AbsoluteFill,
+  cancelRender,
   Img,
   interpolate,
   spring,
@@ -197,9 +198,9 @@ export const PageScene: React.FC<PageSceneProps> = ({
         >
           <Img
             src={staticFile(src)}
-            onError={(e) => {
-              throw new Error(`PageScene: failed to load asset "${src}" — ${e.type}`);
-            }}
+            onError={(e) =>
+              cancelRender(new Error(`PageScene: failed to load asset "${src}" — ${e.type}`))
+            }
             style={{
               width: "100%",
               height: "100%",
