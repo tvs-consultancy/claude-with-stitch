@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { mockUploadedFiles, formatFileSize } from '../data/mock-data';
 import type { UploadedFile } from '../data/mock-data';
 import { Button } from '@/components/ui/button';
@@ -19,12 +19,41 @@ function getFileConfig(type: string) {
   return fileTypeConfig[type] ?? { icon: 'text_snippet', bg: 'bg-slate-100', text: 'text-slate-600' };
 }
 
+function categorizeFile(file: File): string {
+  const mime = file.type;
+  if (mime.startsWith('image/')) return 'image';
+  if (mime.startsWith('video/')) return 'video';
+  if (mime === 'application/pdf') return 'pdf';
+  if (mime.includes('spreadsheet') || mime.includes('excel') || /\.(xlsx?|csv)$/i.test(file.name)) return 'spreadsheet';
+  if (mime.includes('zip') || mime.includes('compressed') || /\.(zip|tar|gz|rar)$/i.test(file.name)) return 'archive';
+  return 'document';
+}
+
+function toUploadedFile(file: File): UploadedFile {
+  return {
+    id: `local-${crypto.randomUUID()}`,
+    name: file.name,
+    size: file.size,
+    type: categorizeFile(file),
+    uploadedAt: new Date().toISOString(),
+    progress: 100,
+  };
+}
+
 export default function FileUpload() {
   const [files, setFiles] = useState<readonly UploadedFile[]>(mockUploadedFiles);
   const [isDragging, setIsDragging] = useState(false);
 
   function handleRemove(id: string) {
     setFiles(files.filter((f) => f.id !== id));
+  }
+
+  function handleDrop(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault();
+    setIsDragging(false);
+    const dropped = Array.from(e.dataTransfer.files);
+    if (dropped.length === 0) return;
+    setFiles([...dropped.map(toUploadedFile), ...files]);
   }
 
   return (
@@ -69,10 +98,7 @@ export default function FileUpload() {
             setIsDragging(true);
           }}
           onDragLeave={() => setIsDragging(false)}
-          onDrop={(e) => {
-            e.preventDefault();
-            setIsDragging(false);
-          }}
+          onDrop={handleDrop}
         >
           <Icon
             name={isDragging ? 'cloud_download' : 'cloud_upload'}

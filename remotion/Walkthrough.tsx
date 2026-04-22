@@ -17,7 +17,7 @@ const pages = [
   {
     src: "assets/chat.png",
     title: "AI Chat",
-    subtitle: "Multi-conversation planning assistant with context memory",
+    subtitle: "Multi-conversation planning assistant with mock AI responses",
   },
   {
     src: "assets/files.png",

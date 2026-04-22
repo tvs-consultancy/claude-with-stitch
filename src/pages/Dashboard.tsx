@@ -33,7 +33,7 @@ const stats = [
   {
     label: 'Total Budget',
     value: formatCurrency(totalBudget),
-    sub: 'Allocated for Q3-Q4',
+    sub: 'Across all plans',
     subIcon: null,
     subColor: 'text-slate-400',
     dotColor: 'bg-active-text',
@@ -41,7 +41,7 @@ const stats = [
   {
     label: 'Active Spend',
     value: formatCurrency(activeBudget),
-    sub: 'Current monthly burn',
+    sub: 'Total active budget',
     subIcon: null,
     subColor: 'text-slate-400',
     dotColor: 'bg-draft-text',
