@@ -197,6 +197,9 @@ export const PageScene: React.FC<PageSceneProps> = ({
         >
           <Img
             src={staticFile(src)}
+            onError={(e) => {
+              throw new Error(`PageScene: failed to load asset "${src}" — ${e.type}`);
+            }}
             style={{
               width: "100%",
               height: "100%",

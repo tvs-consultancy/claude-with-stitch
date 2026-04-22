@@ -97,7 +97,11 @@ export default function FileUpload() {
             e.preventDefault();
             setIsDragging(true);
           }}
-          onDragLeave={() => setIsDragging(false)}
+          onDragLeave={(e) => {
+            if (e.currentTarget.contains(e.relatedTarget as Node | null)) return;
+            setIsDragging(false);
+          }}
+          onDragEnd={() => setIsDragging(false)}
           onDrop={handleDrop}
         >
           <Icon

@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { mockMediaPlans, formatCurrency, formatDateRange } from '../data/mock-data';
+import type { MediaPlan } from '../data/mock-data';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -17,7 +18,7 @@ import Icon from '../components/Icon';
 type ViewMode = 'table' | 'cards';
 type StatusFilter = 'all' | 'active' | 'draft' | 'completed' | 'paused';
 
-const statusColors: Readonly<Record<string, { bg: string; text: string }>> = {
+const statusColors: Readonly<Record<MediaPlan['status'], { bg: string; text: string }>> = {
   active: { bg: 'bg-active-surface', text: 'text-active-text' },
   draft: { bg: 'bg-draft-surface', text: 'text-draft-text' },
   completed: { bg: 'bg-completed-surface', text: 'text-completed-text' },
@@ -201,7 +202,7 @@ export default function MediaPlans() {
                       </TableCell>
                       <TableCell className="px-6 py-4">
                         <Badge
-                          className={`${colors?.bg} ${colors?.text} border-0 rounded-full text-[13px] font-medium capitalize px-3 py-1 h-auto`}
+                          className={`${colors.bg} ${colors.text} border-0 rounded-full text-[13px] font-medium capitalize px-3 py-1 h-auto`}
                         >
                           {plan.status}
                         </Badge>
