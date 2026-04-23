@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
-import { mockMediaPlans, formatCurrency, formatDateRange } from '../data/mock-data';
+import { mockMediaPlans, formatCurrency, formatDateRange, statusColors } from '../data/mock-data';
+import type { MediaPlan } from '../data/mock-data';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,16 +14,10 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import Icon from '../components/Icon';
+import EmptyState from '../components/EmptyState';
 
 type ViewMode = 'table' | 'cards';
-type StatusFilter = 'all' | 'active' | 'draft' | 'completed' | 'paused';
-
-const statusColors: Readonly<Record<string, { bg: string; text: string }>> = {
-  active: { bg: 'bg-active-surface', text: 'text-active-text' },
-  draft: { bg: 'bg-draft-surface', text: 'text-draft-text' },
-  completed: { bg: 'bg-completed-surface', text: 'text-completed-text' },
-  paused: { bg: 'bg-paused-surface', text: 'text-paused-text' },
-};
+type StatusFilter = MediaPlan['status'] | 'all';
 
 export default function MediaPlans() {
   const [view, setView] = useState<ViewMode>('table');
@@ -201,7 +196,7 @@ export default function MediaPlans() {
                       </TableCell>
                       <TableCell className="px-6 py-4">
                         <Badge
-                          className={`${colors?.bg} ${colors?.text} border-0 rounded-full text-[13px] font-medium capitalize px-3 py-1 h-auto`}
+                          className={`${colors.bg} ${colors.text} border-0 rounded-full text-[13px] font-medium capitalize px-3 py-1 h-auto`}
                         >
                           {plan.status}
                         </Badge>
@@ -231,13 +226,11 @@ export default function MediaPlans() {
             </Table>
 
             {filtered.length === 0 && (
-              <div className="flex flex-col items-center justify-center py-16">
-                <Icon name="search_off" className="text-muted-zinc text-[48px] mb-4" size="xl" />
-                <p className="text-lg font-medium text-deep-ink">No plans found</p>
-                <p className="text-[15px] text-mid-zinc mt-1">
-                  Try adjusting your search or filters
-                </p>
-              </div>
+              <EmptyState
+                icon="search_off"
+                title="No plans found"
+                description="Try adjusting your search or filters"
+              />
             )}
           </Card>
         )}
@@ -293,13 +286,12 @@ export default function MediaPlans() {
             })}
 
             {filtered.length === 0 && (
-              <div className="col-span-full flex flex-col items-center justify-center py-16">
-                <Icon name="search_off" className="text-muted-zinc text-[48px] mb-4" size="xl" />
-                <p className="text-lg font-medium text-deep-ink">No plans found</p>
-                <p className="text-[15px] text-mid-zinc mt-1">
-                  Try adjusting your search or filters
-                </p>
-              </div>
+              <EmptyState
+                icon="search_off"
+                title="No plans found"
+                description="Try adjusting your search or filters"
+                className="col-span-full"
+              />
             )}
           </div>
         )}

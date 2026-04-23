@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { mockMediaPlans, formatCurrency, formatDateRange } from '../data/mock-data';
+import { mockMediaPlans, formatCurrency, formatDateRange, statusColors } from '../data/mock-data';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -55,13 +55,6 @@ const stats = [
     dotColor: 'bg-zinc-400',
   },
 ] as const;
-
-const statusBadgeVariant: Readonly<Record<string, { bg: string; text: string }>> = {
-  active: { bg: 'bg-active-surface', text: 'text-active-text' },
-  draft: { bg: 'bg-draft-surface', text: 'text-draft-text' },
-  completed: { bg: 'bg-completed-surface', text: 'text-completed-text' },
-  paused: { bg: 'bg-paused-surface', text: 'text-paused-text' },
-};
 
 export default function Dashboard() {
   return (
@@ -213,7 +206,7 @@ export default function Dashboard() {
             </TableHeader>
             <TableBody>
               {mockMediaPlans.slice(0, 5).map((plan, i) => {
-                const colors = statusBadgeVariant[plan.status];
+                const colors = statusColors[plan.status];
                 return (
                   <TableRow
                     key={plan.id}
@@ -233,7 +226,7 @@ export default function Dashboard() {
                     </TableCell>
                     <TableCell className="px-6 py-5">
                       <Badge
-                        className={`${colors?.bg} ${colors?.text} border-0 rounded-full text-[10px] font-bold uppercase tracking-tight px-3 py-1 h-auto`}
+                        className={`${colors.bg} ${colors.text} border-0 rounded-full text-[10px] font-bold uppercase tracking-tight px-3 py-1 h-auto`}
                       >
                         {plan.status}
                       </Badge>

@@ -4,6 +4,7 @@ import type { Conversation, ChatMessage } from '../data/mock-data';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '../components/Icon';
+import EmptyState from '../components/EmptyState';
 
 const sidebarConversations = [
   { id: '1', title: 'Q2 Digital Strategy Review', date: 'Today' },
@@ -21,10 +22,13 @@ export default function Chat() {
   const [conversations, setConversations] = useState<readonly Conversation[]>(mockConversations);
   const [input, setInput] = useState('');
 
-  const activeConversation = conversations.find((c) => c.id === activeConvId) ?? conversations[0];
+  const activeConversation = conversations.find((c) => c.id === activeConvId);
+  const sidebarEntry = sidebarConversations.find((c) => c.id === activeConvId);
+  const headerTitle = activeConversation?.title ?? sidebarEntry?.title ?? 'Conversation';
+  const messageCount = activeConversation?.messages.length ?? 0;
 
   function handleSend() {
-    if (!input.trim()) return;
+    if (!input.trim() || !activeConversation) return;
 
     const userMsg: ChatMessage = {
       id: `${Date.now()}-u`,
@@ -104,7 +108,7 @@ export default function Chat() {
         <header className="sticky top-0 w-full h-16 bg-white border-b border-zinc-border/50 shadow-sm shadow-black/5 flex justify-between items-center px-8 z-30 shrink-0">
           <div className="flex items-center gap-4">
             <h2 className="text-lg font-semibold text-deep-ink">
-              {activeConversation.title}
+              {headerTitle}
             </h2>
             <Badge variant="secondary" className="bg-surface-container-low text-mid-zinc border-0 rounded text-[10px] metric-lock h-auto">
               SAVED
@@ -114,7 +118,7 @@ export default function Chat() {
             <div className="flex items-center gap-2">
               <Icon name="forum" size="sm" className="text-corsair" />
               <span className="text-sm font-medium text-mid-zinc">
-                {activeConversation.messages.length} messages
+                {messageCount} messages
               </span>
             </div>
             <Button variant="ghost" size="icon" className="rounded-full text-mid-zinc hover:bg-surface-container-low">
@@ -125,7 +129,15 @@ export default function Chat() {
 
         {/* Message Area */}
         <div className="flex-1 overflow-y-auto px-8 py-10 space-y-12 max-w-5xl mx-auto w-full">
-          {activeConversation.messages.map((msg) => (
+          {!activeConversation && (
+            <EmptyState
+              icon="forum"
+              title="No messages yet"
+              description="This conversation hasn't been started. Pick another from the sidebar, or start a new one."
+              padding="lg"
+            />
+          )}
+          {activeConversation?.messages.map((msg) => (
             <div
               key={msg.id}
               className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}

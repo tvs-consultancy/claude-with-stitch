@@ -258,7 +258,15 @@ export const mockUploadedFiles: readonly UploadedFile[] = [
   },
 ];
 
+export const statusColors: Readonly<Record<MediaPlan['status'], { bg: string; text: string }>> = {
+  active: { bg: 'bg-active-surface', text: 'text-active-text' },
+  draft: { bg: 'bg-draft-surface', text: 'text-draft-text' },
+  completed: { bg: 'bg-completed-surface', text: 'text-completed-text' },
+  paused: { bg: 'bg-paused-surface', text: 'text-paused-text' },
+};
+
 export function formatCurrency(amount: number): string {
+  if (!Number.isFinite(amount)) return '—';
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -268,6 +276,7 @@ export function formatCurrency(amount: number): string {
 }
 
 export function formatFileSize(bytes: number): string {
+  if (!Number.isFinite(bytes) || bytes < 0) return '—';
   if (bytes === 0) return '0 Bytes';
   const k = 1024;
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
@@ -278,8 +287,8 @@ export function formatFileSize(bytes: number): string {
 export function formatDateRange(start: string, end: string): string {
   const s = new Date(start);
   const e = new Date(end);
+  if (Number.isNaN(s.getTime()) || Number.isNaN(e.getTime())) return '—';
   const fmt = (d: Date) =>
     d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  const year = e.getFullYear();
-  return `${fmt(s)} - ${fmt(e)}, ${year}`;
+  return `${fmt(s)} - ${fmt(e)}, ${e.getFullYear()}`;
 }
