@@ -13,8 +13,9 @@ MediaPlan Pro — an AI-powered media planning UI application. Currently a front
 - **Lint:** `npm run lint` (ESLint with TypeScript + React hooks plugins)
 - **Type check only:** `npx tsc -b` (no emit, checks types across the project)
 - **Preview prod build:** `npm run preview`
+- **Test:** `npm test` (Vitest, single run) or `npm run test:watch` (watch mode)
 
-No test framework is configured yet.
+Tests live alongside source as `*.test.ts` / `*.test.tsx` under `src/`. Config is in `vitest.config.ts` (Node environment — jsdom/RTL will be added when component tests land).
 
 ## Architecture
 
