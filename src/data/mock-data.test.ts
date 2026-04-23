@@ -10,8 +10,9 @@ describe('formatCurrency', () => {
     expect(formatCurrency(0)).toBe('$0');
   });
 
-  it('formats a negative amount', () => {
-    expect(formatCurrency(-1000)).toBe('-$1,000');
+  it('formats a negative amount with the currency symbol and magnitude', () => {
+    // Intl can emit ASCII '-' or Unicode minus '−' depending on ICU build, so match on magnitude.
+    expect(formatCurrency(-1000)).toMatch(/^[-−]\$1,000$/);
   });
 
   it('rounds fractional amounts to whole dollars', () => {
@@ -23,14 +24,12 @@ describe('formatCurrency', () => {
     expect(formatCurrency(2_800_000)).toBe('$2,800,000');
   });
 
-  it('returns em-dash for NaN', () => {
-    expect(formatCurrency(Number.NaN)).toBe('—');
-  });
-
-  it('returns em-dash for Infinity', () => {
-    expect(formatCurrency(Number.POSITIVE_INFINITY)).toBe('—');
-    expect(formatCurrency(Number.NEGATIVE_INFINITY)).toBe('—');
-  });
+  it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])(
+    'returns em-dash for non-finite input %s',
+    (value) => {
+      expect(formatCurrency(value)).toBe('—');
+    },
+  );
 });
 
 describe('formatFileSize', () => {
@@ -56,33 +55,25 @@ describe('formatFileSize', () => {
     expect(formatFileSize(1024 ** 3)).toBe('1 GB');
   });
 
-  it('returns em-dash for NaN', () => {
-    expect(formatFileSize(Number.NaN)).toBe('—');
-  });
-
-  it('returns em-dash for negative sizes', () => {
-    expect(formatFileSize(-1)).toBe('—');
-  });
-
-  it('returns em-dash for Infinity', () => {
-    expect(formatFileSize(Number.POSITIVE_INFINITY)).toBe('—');
-  });
+  it.each([Number.NaN, Number.POSITIVE_INFINITY, -1])(
+    'returns em-dash for invalid size %s',
+    (value) => {
+      expect(formatFileSize(value)).toBe('—');
+    },
+  );
 });
 
 describe('formatDateRange', () => {
-  it('returns em-dash when the start date is invalid', () => {
-    expect(formatDateRange('not-a-date', '2025-06-30')).toBe('—');
-  });
-
-  it('returns em-dash when the end date is invalid', () => {
-    expect(formatDateRange('2025-03-01', 'bogus')).toBe('—');
-  });
-
-  it('returns em-dash when both dates are empty strings', () => {
-    expect(formatDateRange('', '')).toBe('—');
+  it.each([
+    ['not-a-date', '2025-06-30'],
+    ['2025-03-01', 'bogus'],
+    ['', ''],
+  ])('returns em-dash for invalid input (%s, %s)', (start, end) => {
+    expect(formatDateRange(start, end)).toBe('—');
   });
 
   it('produces the expected shape for a valid range', () => {
+    // Mid-month UTC noon inputs stay mid-month across every real TZ, so the regex is stable.
     expect(formatDateRange('2025-03-15T12:00:00Z', '2025-06-15T12:00:00Z')).toMatch(
       /^[A-Za-z]{3} \d{1,2} - [A-Za-z]{3} \d{1,2}, 2025$/,
     );
