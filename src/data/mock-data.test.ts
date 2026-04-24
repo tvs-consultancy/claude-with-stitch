@@ -86,16 +86,13 @@ describe('formatDateRange', () => {
 });
 
 describe('statusColors', () => {
-  const statuses = Object.keys(statusColors) as MediaPlan['status'][];
-
-  it.each(statuses)('maps %s to a bg-prefixed surface class and text-prefixed text class', (status) => {
-    const entry = statusColors[status];
-    expect(entry.bg).toMatch(/^bg-[a-z]+-surface$/);
-    expect(entry.text).toMatch(/^text-[a-z]+-text$/);
-  });
-
-  it('assigns a unique bg class to each status', () => {
-    const tokens = statuses.map((s) => statusColors[s].bg);
-    expect(new Set(tokens).size).toBe(statuses.length);
+  it('maps each status to the expected Tailwind bg and text tokens', () => {
+    const expected: Record<MediaPlan['status'], { bg: string; text: string }> = {
+      active: { bg: 'bg-active-surface', text: 'text-active-text' },
+      draft: { bg: 'bg-draft-surface', text: 'text-draft-text' },
+      completed: { bg: 'bg-completed-surface', text: 'text-completed-text' },
+      paused: { bg: 'bg-paused-surface', text: 'text-paused-text' },
+    };
+    expect(statusColors).toEqual(expected);
   });
 });
