@@ -5,7 +5,6 @@ import MediaPlans from './MediaPlans';
 import { mockMediaPlans } from '../data/mock-data';
 
 function getDataRowCount(): number {
-  // getAllByRole('row') includes the header row.
   return screen.getAllByRole('row').length - 1;
 }
 
