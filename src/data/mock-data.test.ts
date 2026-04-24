@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { formatCurrency, formatDateRange, formatFileSize } from './mock-data';
+import { formatCurrency, formatDateRange, formatFileSize, statusColors } from './mock-data';
+import type { MediaPlan } from './mock-data';
 
 describe('formatCurrency', () => {
   it('formats a positive integer as USD without fractional digits', () => {
@@ -81,5 +82,20 @@ describe('formatDateRange', () => {
 
   it('derives the year from the end date', () => {
     expect(formatDateRange('2024-12-15T12:00:00Z', '2025-01-15T12:00:00Z')).toMatch(/, 2025$/);
+  });
+});
+
+describe('statusColors', () => {
+  const statuses = Object.keys(statusColors) as MediaPlan['status'][];
+
+  it.each(statuses)('maps %s to a bg-prefixed surface class and text-prefixed text class', (status) => {
+    const entry = statusColors[status];
+    expect(entry.bg).toMatch(/^bg-[a-z]+-surface$/);
+    expect(entry.text).toMatch(/^text-[a-z]+-text$/);
+  });
+
+  it('assigns a unique bg class to each status', () => {
+    const tokens = statuses.map((s) => statusColors[s].bg);
+    expect(new Set(tokens).size).toBe(statuses.length);
   });
 });
